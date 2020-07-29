@@ -15,8 +15,8 @@ public class Server {
 		try
         { 
            Interface face=new implementation();
-           LocateRegistry.createRegistry(5057); 
-           Naming.rebind("rmi://localhost:5057//",face);
+           LocateRegistry.createRegistry(6080); 
+           Naming.rebind("rmi://localhost:6080//",face);
         } 
         catch(Exception error) 
         { 

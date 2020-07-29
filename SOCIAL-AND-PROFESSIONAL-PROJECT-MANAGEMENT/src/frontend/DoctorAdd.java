@@ -129,7 +129,7 @@ public class DoctorAdd extends JFrame {
 				}
 				else {
 					try {
-						Interface lg=(Interface)Naming.lookup("rmi://localhost:5057//");  
+						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
 						Doctor D=new Doctor(Name.getText(),Email.getText(),Integer.parseInt(Phone.getText()),Address.getText(),Specialist.getText());
 						boolean re=lg.addDoctor(D);
 						if(re) {

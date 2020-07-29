@@ -10,6 +10,7 @@ import java.sql.Statement;
 import interfacePackage.Interface;
 import objects.Doctor;
 import objects.Empolyee;
+import objects.Room;
 import security.encryptionClass;
 
 
@@ -79,6 +80,27 @@ public class implementation extends UnicastRemoteObject implements Interface{
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
 			Statement st=con.createStatement();
 			String Sql="INSERT INTO `employee` (`ID`, `Name`, `Date of Birth`, `Address`, `Phone`, `NIC`, `Position`) VALUES (NULL, '"+E.getName()+"', '"+E.getDateofbirth()+"', '"+E.getAddress()+"', '"+E.getPhone()+"', '"+E.getNIC()+"', '"+E.getPosition()+"');";
+			int q = st.executeUpdate(Sql);
+			if(q==1 || q==2) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch(Exception ex){
+			System.out.print(ex);
+			
+		}
+		return false;
+	}
+
+	@Override
+	public boolean addRoom(Room R) throws RemoteException {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+			Statement st=con.createStatement();
+			String Sql="INSERT INTO `room` (`ID`, `Number`, `Floor`) VALUES (NULL, '"+R.getNumber()+"', '"+R.getFloor()+"'); ";
 			int q = st.executeUpdate(Sql);
 			if(q==1 || q==2) {
 				return true;

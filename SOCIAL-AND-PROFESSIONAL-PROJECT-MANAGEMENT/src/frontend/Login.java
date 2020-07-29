@@ -77,7 +77,7 @@ public class Login extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try{  
-					Interface lg=(Interface)Naming.lookup("rmi://localhost:5057//");  
+					Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
 					 int res=lg.login(Username.getText(),Password.getText());
 					 if(res==1) {
 						 	MainWindow MainWindow=new MainWindow();

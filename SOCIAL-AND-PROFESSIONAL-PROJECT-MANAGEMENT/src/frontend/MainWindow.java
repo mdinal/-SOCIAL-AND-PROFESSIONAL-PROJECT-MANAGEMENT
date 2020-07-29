@@ -52,6 +52,33 @@ public class MainWindow extends JFrame {
 		});
 		AddDoctor.setBounds(147, 11, 125, 23);
 		contentPane.add(AddDoctor);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(147, 55, -168, -23);
+		contentPane.add(btnNewButton);
+		
+		JButton btnAddEmployee = new JButton("Add Employee");
+		btnAddEmployee.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddEmployee AE=new AddEmployee();
+				AE.setVisible(true);
+				setVisible(false);
+				dispose(); 
+			}
+		});
+		btnAddEmployee.setBounds(147, 51, 125, 23);
+		contentPane.add(btnAddEmployee);
+		
+		JButton btnAddRoom = new JButton("Add Room");
+		btnAddRoom.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AddROmm AR=new AddROmm();
+				AR.setVisible(true);
+				setVisible(false);
+				dispose(); 
+			}
+		});
+		btnAddRoom.setBounds(147, 91, 125, 23);
+		contentPane.add(btnAddRoom);
 	}
-
 }

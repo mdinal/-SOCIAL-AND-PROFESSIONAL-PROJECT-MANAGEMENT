@@ -44,7 +44,7 @@ public class AddEmployee extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void AddEmployee() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -129,6 +129,14 @@ public class AddEmployee extends JFrame {
 		contentPane.add(Position);
 		
 		JButton btnNewButton = new JButton("Cancel");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MainWindow MainWindow=new MainWindow();
+				MainWindow.setVisible(true);
+				setVisible(false);
+				dispose(); 
+			}
+		});
 		btnNewButton.setBounds(275, 293, 89, 23);
 		contentPane.add(btnNewButton);
 		

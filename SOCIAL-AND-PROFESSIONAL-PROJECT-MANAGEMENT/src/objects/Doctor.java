@@ -3,6 +3,8 @@ package objects;
 import java.io.Serializable;
 
 public class Doctor implements Serializable{
+	int ID;
+	
 	String Name;
 	String Email;
 	int phone;
@@ -19,6 +21,12 @@ public class Doctor implements Serializable{
 		this.phone = phone;
 		Address = address;
 		Specialist = specialist;
+	}
+	public int getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
 	}
 	public String getName() {
 		return Name;

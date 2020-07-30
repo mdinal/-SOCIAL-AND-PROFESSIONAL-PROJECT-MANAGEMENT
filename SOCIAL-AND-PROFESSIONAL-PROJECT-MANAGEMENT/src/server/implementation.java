@@ -6,10 +6,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import interfacePackage.Interface;
 import objects.Doctor;
 import objects.Empolyee;
+import objects.Patient;
 import objects.Room;
 import security.encryptionClass;
 
@@ -115,7 +118,92 @@ public class implementation extends UnicastRemoteObject implements Interface{
 	}
 
 
+	public List showdoctor() throws RemoteException {
+		List <Doctor> arrylist=new ArrayList<Doctor>();
+		 try {
+			 Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+	         
+	         Statement stmt = con.createStatement();
+	         ResultSet rs = stmt.executeQuery("SELECT * FROM doctor");
 
-
-
+	         
+	         while (rs.next()) {
+	        	 Doctor D=new Doctor();
+	        	 D.setID(Integer.parseInt(rs.getString("ID")));
+	            D.setName(rs.getString("Name")); 
+	            D.setEmail(rs.getString("Email"));
+	            D.setPhone(Integer.parseInt(rs.getString("Phone")));
+	            D.setAddress(rs.getString("Address"));
+	            D.setSpecialist(rs.getString("Specialist"));
+	            arrylist.add(D);
+	         }
+	      } catch(Exception ex) {
+	    	  System.out.print(ex);
+	      }
+		return arrylist;
+}
+	public Patient findbyName(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		Patient P = new Patient() ;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+			Statement st=con.createStatement();
+			String SQL="SELECT * FROM patient WHERE Name='"+name+"'";
+			ResultSet rs=st.executeQuery(SQL);
+			
+			while(rs.next()) {
+				P.setID(Integer.parseInt(rs.getString("ID")));
+				P.setAge(Integer.parseInt(rs.getString("Age")));
+				P.setPhone(Integer.parseInt(rs.getString("Phone")));
+				
+			}
+		
+			
+		} catch(Exception ex){
+			System.out.print(ex);
+			
+		}
+		return P;
+	}
+	public boolean AddPatient(Patient P) throws RemoteException {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+			Statement st=con.createStatement();
+			String Sql="INSERT INTO `patient` (`ID`, `Name`, `Age`, `Phone`) VALUES (NULL, '"+P.getName()+"', '"+P.getAge()+"', '"+P.getPhone()+"');";
+			int q = st.executeUpdate(Sql);
+			if(q==1 || q==2) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch(Exception ex){
+			System.out.print(ex);
+			
+		}
+		return false;
+	}
+	public boolean addReservation(int DID,int PID) throws RemoteException {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+			Statement st=con.createStatement();
+			String Sql="INSERT INTO `reservation` (`PID`, `DID`, `ID`) VALUES ('"+PID+"', '"+DID+"', NULL); ";
+			
+			int q = st.executeUpdate(Sql);
+			if(q==1 || q==2) {
+				return true;
+			}else {
+				return false;
+			}
+		} catch(Exception ex){
+			System.out.print(ex);
+			
+		}
+		return false;
+	}
 }

@@ -80,5 +80,13 @@ public class MainWindow extends JFrame {
 		});
 		btnAddRoom.setBounds(147, 91, 125, 23);
 		contentPane.add(btnAddRoom);
+		
+		JButton btnEditDoctor = new JButton("Edit Doctor");
+		btnEditDoctor.setBounds(147, 133, 125, 23);
+		contentPane.add(btnEditDoctor);
+		
+		JButton btnEditemployee = new JButton("Edit Employee");
+		btnEditemployee.setBounds(147, 178, 125, 23);
+		contentPane.add(btnEditemployee);
 	}
 }

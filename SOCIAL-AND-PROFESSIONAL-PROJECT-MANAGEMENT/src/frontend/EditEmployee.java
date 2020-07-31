@@ -1,39 +1,31 @@
 package frontend;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerListModel;
 import javax.swing.border.EmptyBorder;
 
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
-
-import com.toedter.calendar.JTextFieldDateEditor;
+import com.toedter.calendar.DateUtil;
+import com.toedter.calendar.JDateChooser;
 
 import interfacePackage.Interface;
+import objects.Doctor;
 import objects.Empolyee;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerListModel;
 import javax.swing.JButton;
-import org.jdatepicker.DateModel;
-import java.util.Properties;
-import javax.swing.JFormattedTextField.AbstractFormatter;
-import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
 import java.rmi.Naming;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
 
-public class AddEmployee extends JFrame {
+public class EditEmployee extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField Name;
@@ -44,11 +36,11 @@ public class AddEmployee extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void AddEmployee() {
+	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddEmployee frame = new AddEmployee();
+					EditEmployee frame = new EditEmployee();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -60,9 +52,9 @@ public class AddEmployee extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AddEmployee() {
+	public EditEmployee() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 579, 390);
+		setBounds(100, 100, 584, 430);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -128,64 +120,32 @@ public class AddEmployee extends JFrame {
 		Position.setBounds(156, 214, 194, 20);
 		contentPane.add(Position);
 		
-		JButton btnNewButton = new JButton("Cancel");
+		JButton btnNewButton = new JButton("Find");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				MainWindow MainWindow=new MainWindow();
-				MainWindow.setVisible(true);
-				setVisible(false);
-				dispose(); 
-			}
-		});
-		btnNewButton.setBounds(275, 293, 89, 23);
-		contentPane.add(btnNewButton);
-		
-		JButton btnSave = new JButton("Save");
-		btnSave.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
 				if(Name.getText().isEmpty()) {
-					Error.setText("please enter the name");
-				}else if(null==Date.getDate()) {
-					Error.setText("please enter Date of Birth");
-				}else if(Address.getText().isEmpty()) {
-					Error.setText("please enter Address");
-				}else if (Phone.getText().isEmpty()) {
-					Error.setText("please enter phone number");
-				}else if(!(Phone.getText().toString().length()==11)) {
-					Error.setText("please enter vaild phone number");
-				}else if(!(NIC.getText().contains("V") || NIC.getText().contains("V"))){
-					Error.setText("please enter vaild NIC number");
+					Error.setText("please enter a Name");
 				}else {
 					try {
 						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
-						DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd"); 
-						String StringDate=dateFormat.format(Date.getDate());  
-						Empolyee E=new Empolyee(Name.getText(),StringDate,Address.getText(),Integer.parseInt(Phone.getText()),NIC.getText(),Position.getValue().toString());
-						boolean re=lg.AddEmployee(E);
-						if(re==true) {
-							JOptionPane.showMessageDialog(null, "Employee Saved Successfully");
-							Name.setText("");
-							Address.setText("");
-							Phone.setText("");
-							NIC.setText("");
-							Error.setText("");
-							
-						}else
-						{
-							Error.setText("Employee not Saved");
-							
-						}
+						Empolyee E=lg.EmployeeFind(Name.getText());
+						Name.setText(E.getName());
+						Phone.setText(Integer.toString(E.getPhone()));
+						Position.setValue(E.getPosition());
+						Address.setText(E.getAddress());
+						NIC.setText(E.getNIC());
+						java.util.Date dateset = new SimpleDateFormat("yyyy-MM-dd").parse(E.getDateofbirth());
+						Date.setDate(dateset);
+						
 					}catch(Exception ed){
 						System.out.print(ed);
-					}  
-					}
+					} 
 				}
 			}
-		);
-		btnSave.setBounds(402, 293, 89, 23);
-		contentPane.add(btnSave);
-		
-		
+		});
+		btnNewButton.setBounds(387, 28, 89, 23);
+		contentPane.add(btnNewButton);
 
 	}
+
 }

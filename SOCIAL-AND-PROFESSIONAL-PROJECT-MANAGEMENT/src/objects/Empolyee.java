@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class Empolyee implements Serializable {
+	int ID;
 	String Name;
 	String Dateofbirth;
 	String Address;
@@ -22,6 +23,13 @@ public class Empolyee implements Serializable {
 		Phone = phone;
 		NIC = nIC;
 		Position = position;
+	}
+	
+	public int getID() {
+		return ID;
+	}
+	public void setID(int iD) {
+		ID = iD;
 	}
 	public String getName() {
 		return Name;

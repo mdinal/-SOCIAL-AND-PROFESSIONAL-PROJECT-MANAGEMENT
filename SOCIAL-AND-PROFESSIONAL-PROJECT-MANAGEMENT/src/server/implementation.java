@@ -206,4 +206,61 @@ public class implementation extends UnicastRemoteObject implements Interface{
 		}
 		return false;
 	}
+	public Doctor DoctorFind(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		Doctor D = new Doctor() ;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+			Statement st=con.createStatement();
+			String SQL="SELECT * FROM doctor WHERE Name='"+name+"'";
+			ResultSet rs=st.executeQuery(SQL);
+			
+			while(rs.next()) {
+				D.setID(Integer.parseInt(rs.getString("ID")));
+				D.setName(rs.getString("Name"));
+				D.setPhone(Integer.parseInt(rs.getString("Phone")));
+				D.setEmail(rs.getString("Email"));
+				D.setAddress(rs.getString("Address"));
+				D.setSpecialist(rs.getString("Specialist"));
+
+
+				
+			}
+		
+			
+		} catch(Exception ex){
+			System.out.print(ex);
+			
+		}
+		return D;
+	}
+	public Empolyee EmployeeFind(String name) throws RemoteException {
+		// TODO Auto-generated method stub
+		Empolyee E = new Empolyee() ;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+			Statement st=con.createStatement();
+			String SQL="SELECT * FROM employee WHERE Name='"+name+"'";
+			ResultSet rs=st.executeQuery(SQL);
+			
+			while(rs.next()) {
+				E.setID(Integer.parseInt(rs.getString("ID")));
+				E.setName(rs.getString("Name"));
+				E.setDateofbirth(rs.getString("Date of Birth"));
+				E.setAddress(rs.getString("Address"));
+				E.setPhone(Integer.parseInt(rs.getString("Phone")));
+				E.setNIC(rs.getString("NIC"));
+				E.setPosition(rs.getString("Position"));
+				
+			}
+		
+			
+		} catch(Exception ex){
+			System.out.print(ex);
+			
+		}
+		return E;
+	}
 }

@@ -18,4 +18,6 @@ public interface Interface extends Remote {
 	public Patient findbyName(String name) throws RemoteException;
 	public boolean AddPatient(Patient P) throws RemoteException;
 	public boolean addReservation(int DID,int PID) throws RemoteException;
+	public Doctor DoctorFind(String name) throws RemoteException ;
+	public Empolyee EmployeeFind(String name) throws RemoteException;
 }

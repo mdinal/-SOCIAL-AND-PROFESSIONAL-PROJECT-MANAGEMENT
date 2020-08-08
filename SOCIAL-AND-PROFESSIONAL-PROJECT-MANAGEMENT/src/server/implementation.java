@@ -397,4 +397,55 @@ public class implementation extends UnicastRemoteObject implements Interface{
 	    }
 		return true;
 	}
+	public boolean editEMP(Empolyee E) throws RemoteException {
+		// TODO Auto-generated method stub
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "UPDATE employee SET Name = ?, Date of Birth = ?,Address=?,Phone=?,NIC=?,Position=? WHERE ID = ?");
+
+		    ps.setString(1,E.getName());
+		    ps.setString(2,E.getDateofbirth());
+		    ps.setString(3,E.getAddress());
+		    ps.setInt(4,E.getPhone());
+		    ps.setString(5,E.getNIC());
+		    ps.setString(6, E.getPosition());
+		    ps.setInt(6, E.getID());
+
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	public boolean deleteEMP(int ID) throws RemoteException {
+		try
+	    {
+
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+	      
+
+	      String query = "delete from employee where ID = ?";
+	      PreparedStatement preparedStmt = con.prepareStatement(query);
+	      preparedStmt.setInt(1, ID);
+
+
+	      preparedStmt.execute();
+	      
+	      con.close();
+	    }
+	    catch (Exception e)
+	    {
+	      System.err.println(e.getMessage());
+	    }
+		return true;
+	}
 }

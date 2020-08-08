@@ -110,7 +110,7 @@ public class Reservation extends JFrame {
 		contentPane.add(Age);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Contact ");
-		lblNewLabel_1_1_1.setBounds(43, 273, 46, 14);
+		lblNewLabel_1_1_1.setBounds(43, 273, 86, 14);
 		contentPane.add(lblNewLabel_1_1_1);
 		
 		Phone = new JTextField();
@@ -225,6 +225,15 @@ public class Reservation extends JFrame {
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_1_1 = new JButton("Cancel");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Receptionistmain RM=new Receptionistmain();
+				RM.setVisible(true);
+				setVisible(false);
+				dispose(); 
+			}
+			
+		});
 		btnNewButton_1_1.setBounds(417, 358, 89, 23);
 		contentPane.add(btnNewButton_1_1);
 		
@@ -242,7 +251,7 @@ public class Reservation extends JFrame {
 				Error.setText("");
 			}
 		});
-		Clear.setBounds(526, 178, 89, 23);
+		Clear.setBounds(526, 178, 115, 23);
 		Clear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Receptionistmain R=new Receptionistmain();

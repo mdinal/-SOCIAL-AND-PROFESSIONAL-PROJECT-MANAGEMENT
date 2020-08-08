@@ -82,10 +82,27 @@ public class MainWindow extends JFrame {
 		contentPane.add(btnAddRoom);
 		
 		JButton btnEditDoctor = new JButton("Edit Doctor");
+		btnEditDoctor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EditDoctor AR=new EditDoctor();
+				AR.setVisible(true);
+				setVisible(false);
+				dispose(); 
+			}
+			
+		});
 		btnEditDoctor.setBounds(147, 133, 125, 23);
 		contentPane.add(btnEditDoctor);
 		
 		JButton btnEditemployee = new JButton("Edit Employee");
+		btnEditemployee.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EditEmployee AR=new EditEmployee();
+				AR.setVisible(true);
+				setVisible(false);
+				dispose(); 
+			}
+		});
 		btnEditemployee.setBounds(147, 178, 125, 23);
 		contentPane.add(btnEditemployee);
 	}

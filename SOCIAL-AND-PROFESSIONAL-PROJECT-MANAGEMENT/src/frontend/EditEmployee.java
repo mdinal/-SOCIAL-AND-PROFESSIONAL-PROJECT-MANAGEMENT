@@ -32,11 +32,14 @@ public class EditEmployee extends JFrame {
 	private JTextField Address;
 	private JTextField Phone;
 	private JTextField NIC;
+	private JButton btnNewButton;
+	private JButton btnDelete;
+	private JButton btnCancle;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void EditEmployee() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -113,6 +116,25 @@ public class EditEmployee extends JFrame {
 		Error.setBounds(156, 255, 191, 14);
 		contentPane.add(Error);
 		
+		btnNewButton = new JButton("Update");
+		btnNewButton.setBounds(103, 264, 89, 23);
+		contentPane.add(btnNewButton);
+		
+		btnDelete = new JButton("Delete");
+		btnDelete.setBounds(243, 264, 89, 23);
+		contentPane.add(btnDelete);
+		
+		btnCancle = new JButton("Cancle");
+		btnCancle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainWindow MainWindow=new MainWindow();
+				MainWindow.setVisible(true);
+				setVisible(false);
+				dispose(); 
+			}
+		});
+		btnCancle.setBounds(391, 264, 89, 23);
+		contentPane.add(btnCancle);
 	
 		
 		JSpinner Position = new JSpinner();

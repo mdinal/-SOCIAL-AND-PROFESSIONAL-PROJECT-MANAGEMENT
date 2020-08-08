@@ -7,6 +7,7 @@ import java.util.List;
 import objects.Doctor;
 import objects.Empolyee;
 import objects.Patient;
+import objects.Reservation;
 import objects.Room;
 
 public interface Interface extends Remote {
@@ -20,4 +21,6 @@ public interface Interface extends Remote {
 	public boolean addReservation(int DID,int PID) throws RemoteException;
 	public Doctor DoctorFind(String name) throws RemoteException ;
 	public Empolyee EmployeeFind(String name) throws RemoteException;
+	public Reservation findreservation(String Name)throws RemoteException;
+	public boolean confrmresavation(String ID)throws RemoteException;
 }

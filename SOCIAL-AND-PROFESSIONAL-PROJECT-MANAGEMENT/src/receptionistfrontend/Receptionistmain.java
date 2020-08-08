@@ -53,11 +53,19 @@ public class Receptionistmain extends JFrame {
 				dispose(); 
 			}
 		});
-		btnNewButton.setBounds(137, 49, 146, 23);
+		btnNewButton.setBounds(112, 48, 188, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnConfirmReservation = new JButton("Confirm reservation");
-		btnConfirmReservation.setBounds(137, 94, 146, 23);
+		btnConfirmReservation.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ReservationConfirm r=new ReservationConfirm();
+				r.setVisible(true);
+				setVisible(false);
+				dispose(); 
+			}
+		});
+		btnConfirmReservation.setBounds(112, 94, 188, 23);
 		contentPane.add(btnConfirmReservation);
 		
 		JButton btnFindARoom = new JButton("Find a room");

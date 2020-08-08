@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import interfacePackage.Interface;
+import receptionistfrontend.Receptionistmain;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -79,11 +80,18 @@ public class Login extends JFrame {
 				try{  
 					Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
 					 int res=lg.login(Username.getText(),Password.getText());
+					 System.out.print(res);
 					 if(res==1) {
 						 	MainWindow MainWindow=new MainWindow();
 							MainWindow.setVisible(true);
 							setVisible(false);
 							dispose(); 
+					 }else if(res==2) {
+						 
+						 Receptionistmain RM=new Receptionistmain();
+						 RM.setVisible(true);
+						setVisible(false);
+						dispose(); 
 					 }else {
 						 ErrorMsg.setText("invalid password or username");
 					 }

@@ -55,7 +55,18 @@ public class encryptionClass {
         }
         return decryptedText;
     }
-
+//public static void main(String args[]) {
+//	encryptionClass a = null;
+//	try {
+//		a = new encryptionClass();
+//	} catch (Exception e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//	}
+//	
+//	String name=a.encrypt("12345678");
+//	System.out.print(name);
+//}
 
    
 

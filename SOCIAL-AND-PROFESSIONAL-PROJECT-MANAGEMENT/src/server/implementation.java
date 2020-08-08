@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -346,4 +347,54 @@ public class implementation extends UnicastRemoteObject implements Interface{
 	}
 		return false;
 }
+	public boolean editDoctor(Doctor D) throws RemoteException {
+		// TODO Auto-generated method stub
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "UPDATE doctor SET Name = ?, Email = ?,Phone =?,Address=?,Specialist=? WHERE ID = ?");
+
+		    ps.setString(1,D.getName());
+		    ps.setString(2,D.getEmail());
+		    ps.setInt(3,D.getPhone());
+		    ps.setString(4, D.getAddress());
+		    ps.setString(5,D.getSpecialist());
+		    ps.setInt(6, D.getID());
+
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	public boolean deleteDoctor(int ID) throws RemoteException {
+		try
+	    {
+
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+	      
+
+	      String query = "delete from doctor where ID = ?";
+	      PreparedStatement preparedStmt = con.prepareStatement(query);
+	      preparedStmt.setInt(1, ID);
+
+
+	      preparedStmt.execute();
+	      
+	      con.close();
+	    }
+	    catch (Exception e)
+	    {
+	      System.err.println(e.getMessage());
+	    }
+		return true;
+	}
 }

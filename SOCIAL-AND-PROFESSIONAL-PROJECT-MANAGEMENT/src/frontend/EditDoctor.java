@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -30,10 +31,11 @@ public class EditDoctor extends JFrame {
 	private JButton btnDelete;
 	private JButton btnCancle;
 	private JButton btnFind;
+	int ID=-1;
 	/**
 	 * Launch the application.
 	 */
-	public static void EditDoctor() {
+	public static void main(String []args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -108,10 +110,67 @@ public class EditDoctor extends JFrame {
 		contentPane.add(Error);
 		
 		btnNewButton = new JButton("Update");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Name.getText().isEmpty()) {
+					Error.setText("Please enter a name");
+				}else if(Email.getText().isEmpty()) {
+					Error.setText("please enter email");
+				}else if(!(Email.getText().contains("@") && Email.getText().contains("."))) {
+					Error.setText("please enter Vaild email");
+				}else if(Phone.getText().isEmpty()) {
+					Error.setText("please enter phone number");
+				}else if(Phone.getText().length()==10) {
+					Error.setText("please enter vaild phone number");
+				}else if(Specialist.getText().isEmpty()) {
+					Error.setText("Specialist can't be empty");
+				}else {
+					try {
+						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
+						Doctor D=new Doctor(Name.getText(),Email.getText(),Integer.parseInt(Phone.getText()),Address.getText(),Specialist.getText());
+						D.setID(ID);
+						boolean res=lg.editDoctor(D);
+						if(res) {
+							JOptionPane.showMessageDialog(null, "Doctor updated Successfully");
+						}else {
+							Error.setText("ERROR UPDATEING");
+						}
+					}catch(Exception ed){
+						System.out.print(ed);
+					} 
+				}
+			}
+		});
 		btnNewButton.setBounds(103, 264, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(ID==-1) {
+					Error.setText("Find Doctor ");
+				}else {
+					try {
+						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
+						boolean res=lg.deleteDoctor(ID);
+						if(res) {
+							JOptionPane.showMessageDialog(null, "Doctor Deleted Successfully");
+							Name.setText("");
+							Email.setText("");
+							Phone.setText("");
+							Address.setText("");
+							Specialist.setText("");
+							ID=-1;
+							Error.setText("");
+						}else {
+							Error.setText("Error deleteing");
+						}
+					}catch(Exception ed){
+						System.out.print(ed);
+					} 
+				}
+			}
+		});
 		btnDelete.setBounds(243, 264, 89, 23);
 		contentPane.add(btnDelete);
 		
@@ -136,11 +195,13 @@ public class EditDoctor extends JFrame {
 					try {
 						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
 						Doctor D=lg.DoctorFind(Name.getText());
+						ID=D.getID();
 						Name.setText(D.getName());
 						Phone.setText(Integer.toString(D.getPhone()));
 						Email.setText(D.getEmail());
 						Address.setText(D.getAddress());
 						Specialist.setText(D.getSpecialist());
+						System.out.print(ID);
 						
 
 					}catch(Exception ed){

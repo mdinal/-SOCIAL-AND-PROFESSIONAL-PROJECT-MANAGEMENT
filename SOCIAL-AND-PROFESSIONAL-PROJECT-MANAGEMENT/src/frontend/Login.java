@@ -7,7 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import guidoctor.DoctorMain;
 import interfacePackage.Interface;
+import objects.Log;
 import receptionistfrontend.Receptionistmain;
 
 import javax.swing.JLabel;
@@ -79,22 +81,30 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try{  
 					Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
-					 int res=lg.login(Username.getText(),Password.getText());
-					 System.out.print(res);
-					 if(res==1) {
-						 	MainWindow MainWindow=new MainWindow();
-							MainWindow.setVisible(true);
+					 Log res=lg.login(Username.getText(),Password.getText());
+					 if(res==null) {
+						 ErrorMsg.setText("invalid password or username");
+					 }else {
+						 int re=Integer.parseInt(res.getReturn());
+						 if(re==1) {
+							 	MainWindow MainWindow=new MainWindow();
+								MainWindow.setVisible(true);
+								setVisible(false);
+								dispose(); 
+						 }else if(re==2) {
+							 
+							 Receptionistmain RM=new Receptionistmain();
+							 RM.setVisible(true);
 							setVisible(false);
 							dispose(); 
-					 }else if(res==2) {
-						 
-						 Receptionistmain RM=new Receptionistmain();
-						 RM.setVisible(true);
-						setVisible(false);
-						dispose(); 
-					 }else {
-						 ErrorMsg.setText("invalid password or username");
+						 }else if(re==3){
+							 DoctorMain DM=new DoctorMain();
+							 DM.setVisible(true);
+							 setVisible(false);
+							 dispose(); 
+						 }
 					 }
+					 
 				} 
 				catch(Exception ae) 
 		        { 

@@ -105,5 +105,17 @@ public class MainWindow extends JFrame {
 		});
 		btnEditemployee.setBounds(147, 178, 125, 23);
 		contentPane.add(btnEditemployee);
+		
+		JButton btnNewButton_1 = new JButton("Log Out");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login lg=new Login();
+				lg.main(null);
+				setVisible(false);
+				dispose();
+			}
+		});
+		btnNewButton_1.setBounds(315, 227, 89, 23);
+		contentPane.add(btnNewButton_1);
 	}
 }

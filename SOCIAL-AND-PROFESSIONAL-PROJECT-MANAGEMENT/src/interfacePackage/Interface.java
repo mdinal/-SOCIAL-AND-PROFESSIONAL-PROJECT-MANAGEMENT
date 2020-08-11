@@ -6,12 +6,13 @@ import java.util.List;
 
 import objects.Doctor;
 import objects.Empolyee;
+import objects.Log;
 import objects.Patient;
 import objects.Reservation;
 import objects.Room;
 
 public interface Interface extends Remote {
-	int login(String Password,String Username) throws RemoteException;
+	public Log login(String Password,String Username) throws RemoteException;
 	boolean addDoctor(Doctor D)throws RemoteException;
 	boolean AddEmployee(Empolyee E)throws RemoteException;
 	boolean addRoom(Room R)throws RemoteException;
@@ -27,4 +28,11 @@ public interface Interface extends Remote {
 	public boolean deleteDoctor(int ID) throws RemoteException ;
 	public boolean editEMP(Empolyee E) throws RemoteException ;
 	public boolean deleteEMP(int ID)throws RemoteException ;
+	public boolean updateRoom(String ID) throws RemoteException;
+	public Log logeduser() throws RemoteException;
+	public List allroom()throws RemoteException;
+	public boolean DowngradeRoom(String ID) throws RemoteException;
+	public List plist()throws RemoteException; 
+	public Patient findP(String ID)throws RemoteException;
+	public boolean updatepatient(String ID,String d)throws RemoteException;
 }

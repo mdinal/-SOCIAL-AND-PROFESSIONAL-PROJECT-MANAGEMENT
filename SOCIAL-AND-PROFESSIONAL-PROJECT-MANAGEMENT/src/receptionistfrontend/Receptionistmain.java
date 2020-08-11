@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import frontend.Login;
 import frontend.MainWindow;
 
 import javax.swing.JButton;
@@ -71,6 +72,18 @@ public class Receptionistmain extends JFrame {
 		JButton btnFindARoom = new JButton("Find a room");
 		btnFindARoom.setBounds(137, 143, 146, 23);
 		contentPane.add(btnFindARoom);
+		
+		JButton btnNewButton_1 = new JButton("Log Out");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login lg=new Login();
+				lg.main(null);
+				setVisible(false);
+				dispose();
+			}
+		});
+		btnNewButton_1.setBounds(313, 227, 89, 23);
+		contentPane.add(btnNewButton_1);
 	}
 
 }

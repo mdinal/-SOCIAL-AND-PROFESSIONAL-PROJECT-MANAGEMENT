@@ -3,27 +3,34 @@ package objects;
 import java.io.Serializable;
 
 public class Room implements Serializable{
- int number;
- int floor;
+ String number;
+ String floor;
+ String ID;
  
+public String getID() {
+	return ID;
+}
+public void setID(String iD) {
+	ID = iD;
+}
 public Room() {
 	super();
 }
-public Room(int number, int floor) {
+public Room(String number, String floor) {
 	super();
 	this.number = number;
 	this.floor = floor;
 }
-public int getNumber() {
+public String getNumber() {
 	return number;
 }
-public void setNumber(int number) {
+public void setNumber(String number) {
 	this.number = number;
 }
-public int getFloor() {
+public String getFloor() {
 	return floor;
 }
-public void setFloor(int floor) {
+public void setFloor(String floor) {
 	this.floor = floor;
 }
  

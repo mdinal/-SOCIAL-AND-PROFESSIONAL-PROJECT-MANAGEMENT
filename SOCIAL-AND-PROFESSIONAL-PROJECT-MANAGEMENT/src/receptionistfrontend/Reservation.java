@@ -29,14 +29,14 @@ import java.awt.Color;
 public class Reservation extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField DOD;
 	private JTextField Name;
 	private JTextField Age;
 	private JTextField Phone;
 	private JTable table;
 	
-	int DID;
-	int PID;
+	int DID=-1;
+	int PID=-1;
 
 	/**
 	 * Launch the application.
@@ -86,10 +86,10 @@ public class Reservation extends JFrame {
 		scrollPane.setViewportView(table);
 		table.setModel(model);
 		
-		textField = new JTextField();
-		textField.setBounds(161, 134, 250, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		DOD = new JTextField();
+		DOD.setBounds(161, 134, 250, 20);
+		contentPane.add(DOD);
+		DOD.setColumns(10);
 		
 		JLabel lblPa = new JLabel("Patient  Name");
 		lblPa.setBounds(43, 182, 86, 14);
@@ -161,65 +161,28 @@ public class Reservation extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("Save");
 		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(PID==-1) {
-					if(textField.getText().isEmpty()) {
-						Error.setText("please enter Doctor ID ");
-					}
-					else if(Name.getText().isEmpty()) {
-						Error.setText("please enter patient's name");
-					}else if(Age.getText().isEmpty()) {
-						Error.setText("please enter patient's Age");
-					}else if(Phone.getText().isEmpty()) {
-						Error.setText("please enter patient's phone number");
-					}else if(Phone.getText().length()== 10) {
-						Error.setText("please enter patient's phone not Valid");
-					}else {
-						try {
-							Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
-							Patient P=new Patient(Name.getText(),Integer.parseInt(Age.getText()),Integer.parseInt(Phone.getText()));
-							boolean re=lg.AddPatient(P);
-							if(re) {
-								JOptionPane.showMessageDialog(null, "new Patient Saved Successfully");
-								lg.findbyName(Name.getText());
-								Name.setText("");
-								Age.setText("");
-								Phone.setText("");
-								Error.setText("");
-								
-							}else {
-								Error.setText("Patient not Saved");
-							}
-						}catch(Exception ed){
-							System.out.print(ed);
-						} 
-					}
-				}else if(textField.getText().isEmpty()) {
-					Error.setText("please enter Doctor ID ");
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(DOD.getText().isEmpty()) {
+					Error.setText("please enter Doctor ID");
 				}else {
-					
 					try {
 						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
-						boolean re=lg.addReservation(Integer.parseInt(textField.getText()), PID);
-						if(re) {
-							JOptionPane.showMessageDialog(null, "reservation Saved Successfully");
-							textField.setText("");
-							PID=-1;
-							Name.setText("");
-							Age.setText("");
-							Phone.setText("");
-							Error.setText("");
-							
-						}else {
-							Error.setText("reservation not Saved");
-						}
+						boolean res=lg.addReservation(Integer.parseInt(DOD.getText()), PID);
+						if(res) {
+							JOptionPane.showMessageDialog(null, "Reservation added Successfully");
 
+						}else {
+							Error.setText("Reservation adding error");
+						}
 					}catch(Exception ed){
 						System.out.print(ed);
 					}
 				}
-				
 			}
+			
 		});
 		btnNewButton_1.setBounds(138, 358, 89, 23);
 		contentPane.add(btnNewButton_1);
@@ -241,26 +204,45 @@ public class Reservation extends JFrame {
 		
 		contentPane.add(btnNewButton_1_1);
 		
-		JButton Clear = new JButton("Clear Data");
+		JButton Clear = new JButton("Save patient");
 		Clear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				PID=-1;
-				Name.setText("");
-				Age.setText("");
-				Phone.setText("");
-				Error.setText("");
+				if(Name.getText().isEmpty()) {
+					Error.setText("please enter name");
+				}else if(Age.getText().isEmpty()) {
+					Error.setText("please enter Age");
+				}else if(Phone.getText().isEmpty()) {
+					Error.setText("please enter Phone number");
+				}else if(!(Phone.getText().length()==10)){
+					Error.setText("please enter vaild number");
+				}else {
+					try {
+						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//"); 
+						Patient p=new Patient(Name.getText(),Integer.parseInt(Age.getText()),Integer.parseInt(Phone.getText()));
+						boolean re=lg.AddPatient(p);
+						if(re) {
+							JOptionPane.showMessageDialog(null, "Patient added Successfully");
+							try {
+								Interface lg1=(Interface)Naming.lookup("rmi://localhost:6080//");  
+								Patient P=lg1.findbyName(Name.getText());
+								Age.setText(Integer.toString(P.getAge()));
+								Phone.setText(Integer.toString(P.getPhone()));
+								PID=P.getID();
+								System.out.print(PID);
+						        
+						}catch(Exception ed){
+							System.out.print(ed);
+						}  
+						}
+					}catch(Exception ed){
+						System.out.print(ed);
+					} 
+				}
+				
 			}
+
 		});
 		Clear.setBounds(526, 178, 115, 23);
-		Clear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Receptionistmain R=new Receptionistmain();
-				R.setVisible(true);
-				setVisible(false);
-				dispose(); 
-					
-				}
-			});
 		contentPane.add(Clear);
 		
 		

@@ -6,11 +6,13 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerListModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.Position;
 
 import com.toedter.calendar.DateUtil;
 import com.toedter.calendar.JDateChooser;
@@ -22,6 +24,7 @@ import objects.Empolyee;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.rmi.Naming;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
@@ -34,11 +37,15 @@ public class EditEmployee extends JFrame {
 	private JTextField Address;
 	private JTextField Phone;
 	private JTextField NIC;
+	private JButton btnNewButton;
+	private JButton btnDelete;
+	private JButton btnCancle;
+	int ID=-1;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void EditEmployee() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -122,12 +129,91 @@ public class EditEmployee extends JFrame {
 		Error.setBounds(512, 285, 191, 14);
 		contentPane.add(Error);
 		
-	
-		
 		JSpinner Position = new JSpinner();
 		Position.setModel(new SpinnerListModel(new String[] {"receptionist", "nurse"}));
 		Position.setBounds(559, 249, 194, 20);
 		contentPane.add(Position);
+		
+		btnNewButton = new JButton("Update");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Name.getText().isEmpty()) {
+					Error.setText("Enter name");
+				}else if(Address.getText().isEmpty()) {
+					Error.setText("Enter Address");
+				}else if(Phone.getText().isEmpty()) {
+					Error.setText("Enter Phone");
+				}else if(!(Phone.getText().length()==10)) {
+					Error.setText("Enter vaild phone number");
+				}else if(NIC.getText().isEmpty()) {
+					Error.setText("Enter NIC number");
+				}else if(!(NIC.getText().contains("V")||NIC.getText().contains("V"))) {
+					Error.setText("Enter vaild NIC number");
+				}else {
+					try {
+						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+						String StringDate=dateFormat.format(Date.getDate());  
+						Empolyee E=new Empolyee(Name.getText(),StringDate,Address.getText(),Integer.parseInt(Phone.getText()),NIC.getText(),Position.getValue().toString());
+						E.setID(ID);
+						boolean re=lg.editEMP(E);
+						if(re) {
+							JOptionPane.showMessageDialog(null, "Employee updated Successfully");
+						}else {
+							Error.setText("ERROR UPDATEING");
+						}
+					}catch(Exception ed){
+						System.out.print(ed);
+					} 
+				}
+			}
+		});
+		btnNewButton.setBounds(103, 311, 89, 23);
+		contentPane.add(btnNewButton);
+		
+		btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(ID==-1) {
+					Error.setText("Find Employee ");
+				}else {
+					try {
+						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
+						boolean res=lg.deleteEMP(ID);
+						if(res) {
+							JOptionPane.showMessageDialog(null, "Employee Deleted Successfully");
+							Name.setText("");
+							Phone.setText("");
+							Address.setText("");
+							NIC.setText("");
+							ID=-1;
+							Error.setText("");
+						}else {
+							Error.setText("Error deleteing");
+						}
+					}catch(Exception ed){
+						System.out.print(ed);
+					} 
+				}
+			}
+		});
+		btnDelete.setBounds(243, 311, 89, 23);
+		contentPane.add(btnDelete);
+		
+		btnCancle = new JButton("Cancle");
+		btnCancle.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MainWindow MainWindow=new MainWindow();
+				MainWindow.setVisible(true);
+				setVisible(false);
+				dispose(); 
+			}
+		});
+		btnCancle.setBounds(391, 311, 89, 23);
+		contentPane.add(btnCancle);
+	
+		
+
 		
 		JButton btnNewButton = new JButton("Find");
 		btnNewButton.setBackground(Color.WHITE);
@@ -140,6 +226,7 @@ public class EditEmployee extends JFrame {
 					try {
 						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
 						Empolyee E=lg.EmployeeFind(Name.getText());
+						ID=E.getID();
 						Name.setText(E.getName());
 						Phone.setText(Integer.toString(E.getPhone()));
 						Position.setValue(E.getPosition());

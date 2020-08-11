@@ -7,7 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import guidoctor.DoctorMain;
 import interfacePackage.Interface;
+import objects.Log;
+import receptionistfrontend.Receptionistmain;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -89,7 +92,6 @@ public class Login extends JFrame {
 		btnNewButton.setBackground(Color.WHITE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
 				
 			}
 		});

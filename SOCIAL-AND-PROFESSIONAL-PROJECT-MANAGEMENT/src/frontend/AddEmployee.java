@@ -163,7 +163,7 @@ public class AddEmployee extends JFrame {
 				}else {
 					try {
 						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
-						DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd"); 
+						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 						String StringDate=dateFormat.format(Date.getDate());  
 						Empolyee E=new Empolyee(Name.getText(),StringDate,Address.getText(),Integer.parseInt(Phone.getText()),NIC.getText(),Position.getValue().toString());
 						boolean re=lg.AddEmployee(E);

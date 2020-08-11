@@ -8,8 +8,25 @@ public class Patient implements Serializable {
 	String name;
 	int Age;
 	int Phone;
+	String Number;
+	String Details;
 	
-	
+	public String getDetails() {
+		return Details;
+	}
+
+	public void setDetails(String details) {
+		Details = details;
+	}
+
+	public String getNumber() {
+		return Number;
+	}
+
+	public void setNumber(String number) {
+		Number = number;
+	}
+
 	public Patient() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -35,7 +36,7 @@ public class EditDoctor extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void EditDoctor() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -142,11 +143,13 @@ public class EditDoctor extends JFrame {
 					try {
 						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
 						Doctor D=lg.DoctorFind(Name.getText());
+						ID=D.getID();
 						Name.setText(D.getName());
 						Phone.setText(Integer.toString(D.getPhone()));
 						Email.setText(D.getEmail());
 						Address.setText(D.getAddress());
 						Specialist.setText(D.getSpecialist());
+						System.out.print(ID);
 						
 
 					}catch(Exception ed){

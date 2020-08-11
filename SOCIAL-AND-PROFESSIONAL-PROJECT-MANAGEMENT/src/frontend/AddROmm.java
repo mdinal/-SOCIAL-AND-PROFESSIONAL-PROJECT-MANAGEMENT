@@ -88,7 +88,7 @@ public class AddROmm extends JFrame {
 				}else {
 					try {
 						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
-						Room R=new Room(Integer.parseInt(Number.getText()),Integer.parseInt(Floor.getText()));
+						Room R=new Room(Number.getText(),Floor.getText());
 						boolean re=lg.addRoom(R);
 						if(re) {
 							JOptionPane.showMessageDialog(null, "Room Saved Successfully");

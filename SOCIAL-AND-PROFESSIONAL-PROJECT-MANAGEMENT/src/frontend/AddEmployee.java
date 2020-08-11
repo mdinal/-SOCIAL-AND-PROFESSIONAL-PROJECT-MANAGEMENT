@@ -32,6 +32,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
+import java.awt.SystemColor;
 
 public class AddEmployee extends JFrame {
 
@@ -62,58 +65,58 @@ public class AddEmployee extends JFrame {
 	 */
 	public AddEmployee() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 579, 390);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Name");
-		lblNewLabel.setBounds(53, 32, 46, 14);
+		lblNewLabel.setBounds(459, 27, 46, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Date of birth");
-		lblNewLabel_1.setBounds(53, 70, 82, 14);
+		lblNewLabel_1.setBounds(459, 65, 82, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Address");
-		lblNewLabel_2.setBounds(53, 108, 46, 14);
+		lblNewLabel_2.setBounds(459, 103, 82, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Phone");
-		lblNewLabel_3.setBounds(53, 148, 46, 14);
+		lblNewLabel_3.setBounds(459, 143, 46, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("NIC");
-		lblNewLabel_4.setBounds(53, 178, 46, 14);
+		lblNewLabel_4.setBounds(459, 173, 46, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Position");
-		lblNewLabel_5.setBounds(53, 214, 46, 14);
+		lblNewLabel_5.setBounds(459, 209, 64, 14);
 		contentPane.add(lblNewLabel_5);
 		
 		Name = new JTextField();
-		Name.setBounds(156, 29, 191, 20);
+		Name.setBounds(562, 24, 191, 20);
 		contentPane.add(Name);
 		Name.setColumns(10);
 		
 		Address = new JTextField();
 		Address.setColumns(10);
-		Address.setBounds(156, 105, 191, 20);
+		Address.setBounds(562, 100, 191, 20);
 		contentPane.add(Address);
 		
 		Phone = new JTextField();
 		Phone.setColumns(10);
-		Phone.setBounds(156, 145, 191, 20);
+		Phone.setBounds(562, 140, 191, 20);
 		contentPane.add(Phone);
 		
 		NIC = new JTextField();
 		NIC.setColumns(10);
-		NIC.setBounds(156, 175, 191, 20);
+		NIC.setBounds(562, 170, 191, 20);
 		contentPane.add(NIC);
 		
 		JDateChooser Date = new JDateChooser();
-		Date.setBounds(156, 70, 191, 20);
+		Date.setBounds(562, 65, 191, 20);
 		contentPane.add(Date);
 		
 		JLabel Error = new JLabel("");
@@ -125,10 +128,11 @@ public class AddEmployee extends JFrame {
 		
 		JSpinner Position = new JSpinner();
 		Position.setModel(new SpinnerListModel(new String[] {"receptionist", "nurse"}));
-		Position.setBounds(156, 214, 194, 20);
+		Position.setBounds(562, 209, 194, 20);
 		contentPane.add(Position);
 		
 		JButton btnNewButton = new JButton("Cancel");
+		btnNewButton.setBackground(Color.RED);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MainWindow MainWindow=new MainWindow();
@@ -137,10 +141,11 @@ public class AddEmployee extends JFrame {
 				dispose(); 
 			}
 		});
-		btnNewButton.setBounds(275, 293, 89, 23);
+		btnNewButton.setBounds(626, 255, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.setBackground(Color.GREEN);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(Name.getText().isEmpty()) {
@@ -182,8 +187,13 @@ public class AddEmployee extends JFrame {
 				}
 			}
 		);
-		btnSave.setBounds(402, 293, 89, 23);
+		btnSave.setBounds(507, 255, 89, 23);
 		contentPane.add(btnSave);
+		
+		JLabel lblNewLabel_6 = new JLabel("");
+		lblNewLabel_6.setIcon(new ImageIcon(AddEmployee.class.getResource("/images/160606__gif.gif")));
+		lblNewLabel_6.setBounds(0, 0, 784, 561);
+		contentPane.add(lblNewLabel_6);
 		
 		
 

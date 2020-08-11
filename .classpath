@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="SOCIAL-AND-PROFESSIONAL-PROJECT-MANAGEMENT/src"/>
+	<classpathentry kind="lib" path="C:/Users/DamithMusic/Downloads/New folder (2)/jarFiles/apache-commons.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DamithMusic/Downloads/New folder (2)/jarFiles/commons-codec-1.14.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DamithMusic/Downloads/New folder (2)/jarFiles/helloworld-rmi-server-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DamithMusic/Downloads/New folder (2)/jarFiles/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DamithMusic/Downloads/New folder (2)/jarFiles/jdatepicker-1.3.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DamithMusic/Downloads/New folder (2)/jarFiles/mysql-connector.jar"/>
+	<classpathentry kind="lib" path="C:/Users/DamithMusic/Downloads/New folder (2)/jarFiles/rmi-1.5.1-sources.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.rmi.Naming;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class EditDoctor extends JFrame {
 
@@ -30,6 +31,7 @@ public class EditDoctor extends JFrame {
 	private JButton btnDelete;
 	private JButton btnCancle;
 	private JButton btnFind;
+	private JLabel lblNewLabel_5;
 	/**
 	 * Launch the application.
 	 */
@@ -51,55 +53,55 @@ public class EditDoctor extends JFrame {
 	 */
 	public EditDoctor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 634, 355);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Name");
-		lblNewLabel.setBounds(88, 35, 46, 14);
+		lblNewLabel.setBounds(457, 28, 46, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Email");
-		lblNewLabel_1.setBounds(88, 73, 46, 14);
+		lblNewLabel_1.setBounds(457, 75, 46, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Phone");
-		lblNewLabel_2.setBounds(88, 115, 46, 14);
+		lblNewLabel_2.setBounds(457, 117, 46, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Address");
-		lblNewLabel_3.setBounds(88, 157, 46, 14);
+		lblNewLabel_3.setBounds(457, 159, 46, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Specialist ");
-		lblNewLabel_4.setBounds(88, 198, 70, 14);
+		lblNewLabel_4.setBounds(457, 200, 70, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		Name = new JTextField();
-		Name.setBounds(179, 32, 138, 20);
+		Name.setBounds(548, 25, 138, 20);
 		contentPane.add(Name);
 		Name.setColumns(10);
 		
 		Email = new JTextField();
 		Email.setColumns(10);
-		Email.setBounds(179, 70, 138, 20);
+		Email.setBounds(548, 72, 138, 20);
 		contentPane.add(Email);
 		
 		Phone = new JTextField();
 		Phone.setColumns(10);
-		Phone.setBounds(179, 112, 138, 20);
+		Phone.setBounds(548, 114, 138, 20);
 		contentPane.add(Phone);
 		
 		Address = new JTextField();
 		Address.setColumns(10);
-		Address.setBounds(179, 154, 138, 20);
+		Address.setBounds(548, 156, 138, 20);
 		contentPane.add(Address);
 		
 		Specialist = new JTextField();
 		Specialist.setColumns(10);
-		Specialist.setBounds(179, 195, 138, 20);
+		Specialist.setBounds(548, 197, 138, 20);
 		contentPane.add(Specialist);
 		
 		JLabel Error = new JLabel("");
@@ -108,14 +110,17 @@ public class EditDoctor extends JFrame {
 		contentPane.add(Error);
 		
 		btnNewButton = new JButton("Update");
-		btnNewButton.setBounds(103, 264, 89, 23);
+		btnNewButton.setBackground(Color.BLUE);
+		btnNewButton.setBounds(457, 244, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		btnDelete = new JButton("Delete");
-		btnDelete.setBounds(243, 264, 89, 23);
+		btnDelete.setBackground(Color.ORANGE);
+		btnDelete.setBounds(556, 244, 89, 23);
 		contentPane.add(btnDelete);
 		
 		btnCancle = new JButton("Cancle");
+		btnCancle.setBackground(Color.RED);
 		btnCancle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainWindow MainWindow=new MainWindow();
@@ -124,10 +129,11 @@ public class EditDoctor extends JFrame {
 				dispose(); 
 			}
 		});
-		btnCancle.setBounds(391, 264, 89, 23);
+		btnCancle.setBounds(655, 244, 89, 23);
 		contentPane.add(btnCancle);
 		
 		btnFind = new JButton("Find");
+		btnFind.setBackground(Color.GREEN);
 		btnFind.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Name.getText().isEmpty()) {
@@ -149,8 +155,13 @@ public class EditDoctor extends JFrame {
 				}
 			}
 		});
-		btnFind.setBounds(357, 31, 89, 23);
+		btnFind.setBounds(694, 25, 80, 23);
 		contentPane.add(btnFind);
+		
+		lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon(EditDoctor.class.getResource("/images/hospital_icon.gif")));
+		lblNewLabel_5.setBounds(0, 0, 784, 561);
+		contentPane.add(lblNewLabel_5);
 		
 	}
 }

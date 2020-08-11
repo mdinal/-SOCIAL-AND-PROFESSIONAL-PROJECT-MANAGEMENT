@@ -9,6 +9,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Font;
 
 public class MainWindow extends JFrame {
 
@@ -35,13 +39,15 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(Color.WHITE);
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JButton AddDoctor = new JButton("Add Doctor");
+		AddDoctor.setFont(new Font("Calibri", Font.PLAIN, 14));
 		AddDoctor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				DoctorAdd DA=new DoctorAdd();
@@ -50,14 +56,11 @@ public class MainWindow extends JFrame {
 				dispose(); 
 			}
 		});
-		AddDoctor.setBounds(147, 11, 125, 23);
+		AddDoctor.setBounds(624, 30, 125, 23);
 		contentPane.add(AddDoctor);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(147, 55, -168, -23);
-		contentPane.add(btnNewButton);
-		
 		JButton btnAddEmployee = new JButton("Add Employee");
+		btnAddEmployee.setFont(new Font("Calibri", Font.PLAIN, 14));
 		btnAddEmployee.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddEmployee AE=new AddEmployee();
@@ -66,10 +69,11 @@ public class MainWindow extends JFrame {
 				dispose(); 
 			}
 		});
-		btnAddEmployee.setBounds(147, 51, 125, 23);
+		btnAddEmployee.setBounds(624, 64, 125, 23);
 		contentPane.add(btnAddEmployee);
 		
 		JButton btnAddRoom = new JButton("Add Room");
+		btnAddRoom.setFont(new Font("Calibri", Font.PLAIN, 14));
 		btnAddRoom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AddROmm AR=new AddROmm();
@@ -78,15 +82,22 @@ public class MainWindow extends JFrame {
 				dispose(); 
 			}
 		});
-		btnAddRoom.setBounds(147, 91, 125, 23);
+		btnAddRoom.setBounds(624, 98, 125, 23);
 		contentPane.add(btnAddRoom);
 		
 		JButton btnEditDoctor = new JButton("Edit Doctor");
-		btnEditDoctor.setBounds(147, 133, 125, 23);
+		btnEditDoctor.setFont(new Font("Calibri", Font.PLAIN, 14));
+		btnEditDoctor.setBounds(624, 132, 125, 23);
 		contentPane.add(btnEditDoctor);
 		
 		JButton btnEditemployee = new JButton("Edit Employee");
-		btnEditemployee.setBounds(147, 178, 125, 23);
+		btnEditemployee.setFont(new Font("Calibri", Font.PLAIN, 14));
+		btnEditemployee.setBounds(624, 166, 125, 23);
 		contentPane.add(btnEditemployee);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(MainWindow.class.getResource("/images/medical_building_800x600.gif")));
+		lblNewLabel.setBounds(0, 0, 784, 561);
+		contentPane.add(lblNewLabel);
 	}
 }

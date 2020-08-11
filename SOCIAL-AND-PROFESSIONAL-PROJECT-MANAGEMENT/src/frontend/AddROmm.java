@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.rmi.Naming;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class AddROmm extends JFrame {
 
@@ -46,28 +47,28 @@ public class AddROmm extends JFrame {
 	 */
 	public AddROmm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Number");
-		lblNewLabel.setBounds(109, 66, 46, 14);
+		lblNewLabel.setBounds(543, 43, 46, 14);
 		contentPane.add(lblNewLabel);
 		
 		Number = new JTextField();
-		Number.setBounds(219, 63, 86, 20);
+		Number.setBounds(624, 37, 123, 20);
 		contentPane.add(Number);
 		Number.setColumns(10);
 		
 		Floor = new JTextField();
 		Floor.setColumns(10);
-		Floor.setBounds(219, 110, 86, 20);
+		Floor.setBounds(624, 84, 123, 20);
 		contentPane.add(Floor);
 		
 		JLabel lblFloor = new JLabel("Floor");
-		lblFloor.setBounds(109, 113, 46, 14);
+		lblFloor.setBounds(543, 90, 46, 14);
 		contentPane.add(lblFloor);
 		
 		JLabel Error = new JLabel("");
@@ -76,6 +77,7 @@ public class AddROmm extends JFrame {
 		contentPane.add(Error);
 		
 		JButton btnNewButton = new JButton("Save");
+		btnNewButton.setBackground(Color.GREEN);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(Number.getText().isEmpty()) {
@@ -102,10 +104,11 @@ public class AddROmm extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(282, 227, 89, 23);
+		btnNewButton.setBounds(559, 138, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Cancel");
+		btnNewButton_1.setBackground(Color.RED);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainWindow MainWindow=new MainWindow();
@@ -114,8 +117,13 @@ public class AddROmm extends JFrame {
 				dispose(); 
 			}
 		});
-		btnNewButton_1.setBounds(167, 227, 89, 23);
+		btnNewButton_1.setBounds(658, 138, 89, 23);
 		contentPane.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(AddROmm.class.getResource("/images/dribbble_2.gif")));
+		lblNewLabel_1.setBounds(0, 0, 784, 561);
+		contentPane.add(lblNewLabel_1);
 		
 		
 	}

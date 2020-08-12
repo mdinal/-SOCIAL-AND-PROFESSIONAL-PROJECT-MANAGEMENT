@@ -70,6 +70,14 @@ public class Receptionistmain extends JFrame {
 		contentPane.add(btnConfirmReservation);
 		
 		JButton btnFindARoom = new JButton("Find a room");
+		btnFindARoom.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Table t=new Table();
+				t.setVisible(true);
+				setVisible(false);
+				dispose();
+			}
+		});
 		btnFindARoom.setBounds(137, 143, 146, 23);
 		contentPane.add(btnFindARoom);
 		

@@ -6,7 +6,14 @@ public class Room implements Serializable{
  String number;
  String floor;
  String ID;
+ String Availability;
  
+public String getAvailability() {
+	return Availability;
+}
+public void setAvailability(String availability) {
+	Availability = availability;
+}
 public String getID() {
 	return ID;
 }

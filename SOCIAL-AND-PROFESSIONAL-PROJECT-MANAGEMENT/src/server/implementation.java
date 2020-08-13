@@ -17,6 +17,7 @@ import objects.Log;
 import objects.Patient;
 import objects.Reservation;
 import objects.Room;
+import objects.Vehicle;
 import security.encryptionClass;
 
 
@@ -606,5 +607,102 @@ public class implementation extends UnicastRemoteObject implements Interface{
 	}
 		return false;
 }
+	public boolean addVehicle(Vehicle V) throws RemoteException {
+		// TODO Auto-generated method stub
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "INSERT INTO vehicle (ID, Number, Availability, Model) VALUES (NULL, ?, ?, ?);");
+
+		    ps.setString(1,V.getNumber());
+		    ps.setString(2, V.getAvailability());
+		    ps.setString(3,V.getModel());
+
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	public boolean EditVehicle(Vehicle V) throws RemoteException {
+		// TODO Auto-generated method stub
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "UPDATE `vehicle` SET `Number`=?,`Availability`=?,`Model`=? WHERE ID=?");
+
+		    ps.setString(1,V.getNumber());
+		    ps.setString(2,V.getAvailability());
+		    ps.setString(3,V.getModel());
+		    ps.setString(4,V.getID());
+
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	
+	public boolean DeleteVehicle(String V) throws RemoteException {
+		// TODO Auto-generated method stub
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "DELETE FROM `vehicle` WHERE ID=?");
+
+		    ps.setString(1,V);
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	public List Vehiclelist()throws RemoteException {
+
+		List<Vehicle> list= new ArrayList<Vehicle>();
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+			Statement st=con.createStatement();
+			String SQL="SELECT * FROM `vehicle`";
+			ResultSet rs=st.executeQuery(SQL);
+			
+			while(rs.next()) {
+				Vehicle V=new Vehicle();
+				V.setNumber(rs.getString("Number"));
+				V.setID(rs.getString("ID"));
+				V.setAvailability(rs.getString("Availability"));
+				V.setModel(rs.getString("Model"));
+				list.add(V);
+			}
+		
+		}catch (Exception e){
+		      System.err.println(e.getMessage());
+		    }
+		return list;
+		
+	}
 
 }

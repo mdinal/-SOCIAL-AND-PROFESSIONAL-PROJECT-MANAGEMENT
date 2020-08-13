@@ -10,6 +10,7 @@ import objects.Log;
 import objects.Patient;
 import objects.Reservation;
 import objects.Room;
+import objects.Vehicle;
 
 public interface Interface extends Remote {
 	public Log login(String Password,String Username) throws RemoteException;
@@ -35,4 +36,9 @@ public interface Interface extends Remote {
 	public List plist()throws RemoteException; 
 	public Patient findP(String ID)throws RemoteException;
 	public boolean updatepatient(String ID,String d)throws RemoteException;
+	public boolean addVehicle(Vehicle V) throws RemoteException ;
+	public boolean EditVehicle(Vehicle V) throws RemoteException;
+	public boolean DeleteVehicle(String V) throws RemoteException;
+	public List Vehiclelist()throws RemoteException;
+	
 }

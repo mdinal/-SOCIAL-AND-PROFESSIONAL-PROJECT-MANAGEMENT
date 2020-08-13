@@ -47,18 +47,18 @@ public class Login extends JFrame {
 	 */
 	public Login() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Username");
-		lblNewLabel.setBounds(83, 57, 82, 14);
+		lblNewLabel.setBounds(144, 270, 82, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Password");
-		lblNewLabel_1.setBounds(83, 103, 82, 14);
+		lblNewLabel_1.setBounds(144, 316, 82, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel ErrorMsg = new JLabel("");
@@ -67,12 +67,12 @@ public class Login extends JFrame {
 		contentPane.add(ErrorMsg);
 		
 		Username = new JTextField();
-		Username.setBounds(189, 54, 128, 20);
+		Username.setBounds(248, 266, 349, 20);
 		contentPane.add(Username);
 		Username.setColumns(10);
 		
 		Password = new JTextField();
-		Password.setBounds(189, 100, 128, 20);
+		Password.setBounds(248, 312, 349, 20);
 		contentPane.add(Password);
 		Password.setColumns(10);
 		
@@ -114,7 +114,7 @@ public class Login extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(293, 186, 89, 23);
+		btnNewButton.setBounds(412, 398, 160, 23);
 		contentPane.add(btnNewButton);
 		
 		

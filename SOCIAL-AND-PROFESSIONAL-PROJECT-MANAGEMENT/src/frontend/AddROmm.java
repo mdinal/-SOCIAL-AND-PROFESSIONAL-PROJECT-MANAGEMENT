@@ -46,33 +46,33 @@ public class AddROmm extends JFrame {
 	 */
 	public AddROmm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Number");
-		lblNewLabel.setBounds(109, 66, 46, 14);
+		lblNewLabel.setBounds(265, 179, 46, 14);
 		contentPane.add(lblNewLabel);
 		
 		Number = new JTextField();
-		Number.setBounds(219, 63, 86, 20);
+		Number.setBounds(375, 176, 182, 20);
 		contentPane.add(Number);
 		Number.setColumns(10);
 		
 		Floor = new JTextField();
 		Floor.setColumns(10);
-		Floor.setBounds(219, 110, 86, 20);
+		Floor.setBounds(375, 223, 182, 20);
 		contentPane.add(Floor);
 		
 		JLabel lblFloor = new JLabel("Floor");
-		lblFloor.setBounds(109, 113, 46, 14);
+		lblFloor.setBounds(265, 226, 46, 14);
 		contentPane.add(lblFloor);
 		
 		JLabel Error = new JLabel("");
 		Error.setForeground(Color.RED);
-		Error.setBounds(137, 181, 190, 14);
+		Error.setBounds(293, 294, 190, 14);
 		contentPane.add(Error);
 		
 		JButton btnNewButton = new JButton("Save");
@@ -102,7 +102,7 @@ public class AddROmm extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(282, 227, 89, 23);
+		btnNewButton.setBounds(438, 340, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Cancel");
@@ -114,7 +114,7 @@ public class AddROmm extends JFrame {
 				dispose(); 
 			}
 		});
-		btnNewButton_1.setBounds(167, 227, 89, 23);
+		btnNewButton_1.setBounds(323, 340, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 		

@@ -117,5 +117,17 @@ public class MainWindow extends JFrame {
 		});
 		btnNewButton_1.setBounds(315, 227, 89, 23);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Ambulance");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ambulance a=new Ambulance();
+				a.setVisible(true);
+				setVisible(false);
+				dispose();
+			}
+		});
+		btnNewButton_2.setBounds(147, 212, 125, 23);
+		contentPane.add(btnNewButton_2);
 	}
 }

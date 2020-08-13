@@ -40,5 +40,7 @@ public interface Interface extends Remote {
 	public boolean EditVehicle(Vehicle V) throws RemoteException;
 	public boolean DeleteVehicle(String V) throws RemoteException;
 	public List Vehiclelist()throws RemoteException;
+	public boolean VehicleAvailable(String D) throws RemoteException;
+	public boolean VehicleUnavailable(String D) throws RemoteException;
 	
 }

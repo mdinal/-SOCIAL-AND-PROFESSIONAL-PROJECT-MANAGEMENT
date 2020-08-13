@@ -23,6 +23,8 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JComboBox;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class DoctorMain extends JFrame {
 
@@ -31,6 +33,7 @@ public class DoctorMain extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JLabel Error;
 	private JComboBox Nu;
+	private JLabel lblNewLabel_2;
 	/**
 	 * Launch the application.
 	 */
@@ -56,14 +59,15 @@ public class DoctorMain extends JFrame {
 
 	public DoctorMain() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 451, 342);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		Name = new JLabel("");
-		Name.setBounds(127, 70, 223, 14);
+		Name.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		Name.setBounds(209, 217, 241, 23);
 		contentPane.add(Name);
 		
 		try {
@@ -97,7 +101,7 @@ public class DoctorMain extends JFrame {
 				}  
 			}
 		});
-		btnNewButton.setBounds(267, 252, 89, 23);
+		btnNewButton.setBounds(650, 527, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Log Out");
@@ -109,25 +113,30 @@ public class DoctorMain extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_1.setBounds(50, 252, 89, 23);
+		btnNewButton_1.setBounds(650, 69, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JLabel lblNewLabel = new JLabel("Please Enter Room Number and Floor your in");
-		lblNewLabel.setBounds(113, 103, 246, 14);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewLabel.setBounds(196, 295, 410, 23);
 		contentPane.add(lblNewLabel);
 		
 		lblNewLabel_1 = new JLabel("Hello Doctor,");
-		lblNewLabel_1.setBounds(81, 45, 178, 14);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewLabel_1.setBounds(79, 158, 184, 28);
 		contentPane.add(lblNewLabel_1);
 		
 		Error = new JLabel("");
+		Error.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		Error.setForeground(Color.RED);
-		Error.setBounds(113, 217, 197, 14);
+		Error.setBounds(209, 437, 325, 23);
 		contentPane.add(Error);
 		
 		Nu = new JComboBox();
-		Nu.setBounds(70, 159, 280, 20);
+		Nu.setBounds(250, 379, 280, 20);
 		contentPane.add(Nu);
+		
+		
 		
 		try {
 			Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
@@ -139,5 +148,13 @@ public class DoctorMain extends JFrame {
 		}catch(Exception ed){
 			System.out.print(ed);
 		}  
+		
+		lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon(DoctorMain.class.getResource("/images/main-qimg-3b02a08f616a383c88f7a378f13648d2.gif")));
+		lblNewLabel_2.setBounds(0, 0, 800, 600);
+		contentPane.add(lblNewLabel_2);
+		
+		setUndecorated(true);
+		setLocationRelativeTo(null);
 	}
 }

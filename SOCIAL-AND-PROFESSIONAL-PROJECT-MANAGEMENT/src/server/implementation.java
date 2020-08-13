@@ -704,5 +704,51 @@ public class implementation extends UnicastRemoteObject implements Interface{
 		return list;
 		
 	}
+	public boolean VehicleAvailable(String D) throws RemoteException {
+		// TODO Auto-generated method stub
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "UPDATE `vehicle` SET `Availability`=? WHERE ID=?");
+
+		    ps.setString(1,"Available");
+		    ps.setString(2,D);
+
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	public boolean VehicleUnavailable(String D) throws RemoteException {
+		// TODO Auto-generated method stub
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "UPDATE `vehicle` SET `Availability`=? WHERE ID=?");
+
+		    ps.setString(1,"Unavailable");
+		    ps.setString(2,D);
+
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
 
 }

@@ -13,6 +13,8 @@ import frontend.MainWindow;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class Receptionistmain extends JFrame {
 
@@ -39,7 +41,7 @@ public class Receptionistmain extends JFrame {
 	 */
 	public Receptionistmain() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -54,7 +56,7 @@ public class Receptionistmain extends JFrame {
 				dispose(); 
 			}
 		});
-		btnNewButton.setBounds(112, 48, 188, 23);
+		btnNewButton.setBounds(201, 143, 357, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnConfirmReservation = new JButton("Confirm reservation");
@@ -66,7 +68,7 @@ public class Receptionistmain extends JFrame {
 				dispose(); 
 			}
 		});
-		btnConfirmReservation.setBounds(112, 94, 188, 23);
+		btnConfirmReservation.setBounds(201, 218, 357, 23);
 		contentPane.add(btnConfirmReservation);
 		
 		JButton btnFindARoom = new JButton("Find a room");
@@ -78,7 +80,7 @@ public class Receptionistmain extends JFrame {
 				dispose();
 			}
 		});
-		btnFindARoom.setBounds(137, 143, 146, 23);
+		btnFindARoom.setBounds(201, 277, 357, 23);
 		contentPane.add(btnFindARoom);
 		
 		JButton btnNewButton_1 = new JButton("Log Out");
@@ -90,8 +92,28 @@ public class Receptionistmain extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_1.setBounds(313, 227, 89, 23);
+		btnNewButton_1.setBounds(621, 30, 89, 23);
 		contentPane.add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Ambulance");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Ambulance a=new Ambulance();
+				a.setVisible(true);
+				setVisible(false);
+				dispose();
+			}
+		});
+		btnNewButton_2.setBounds(201, 362, 357, 23);
+		contentPane.add(btnNewButton_2);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(Receptionistmain.class.getResource("/images/dribbble_2.gif")));
+		lblNewLabel.setBounds(0, 0, 800, 600);
+		contentPane.add(lblNewLabel);
+		
+		setUndecorated(true);
+		setLocationRelativeTo(null);
 	}
 
 }

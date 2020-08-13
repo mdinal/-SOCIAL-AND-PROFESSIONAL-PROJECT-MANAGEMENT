@@ -18,6 +18,8 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.rmi.Naming;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.ImageIcon;
 
 public class ReservationConfirm extends JFrame {
 
@@ -45,57 +47,67 @@ public class ReservationConfirm extends JFrame {
 	 */
 	public ReservationConfirm() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 503, 327);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Name");
-		lblNewLabel.setBounds(68, 23, 54, 14);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewLabel.setBounds(146, 153, 74, 29);
 		contentPane.add(lblNewLabel);
 		JLabel Error = new JLabel("");
+		Error.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		Error.setForeground(Color.RED);
-		Error.setBounds(116, 225, 185, 14);
+		Error.setBounds(256, 448, 319, 29);
 		contentPane.add(Error);
 		
 		JLabel Doctor = new JLabel("");
-		Doctor.setBounds(175, 111, 138, 14);
+		Doctor.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		Doctor.setBounds(404, 281, 193, 29);
 		contentPane.add(Doctor);
 		
 		JLabel Phone = new JLabel("");
-		Phone.setBounds(175, 143, 160, 14);
+		Phone.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		Phone.setBounds(404, 337, 225, 23);
 		contentPane.add(Phone);
 		
 		JLabel Fee = new JLabel("");
-		Fee.setBounds(175, 76, 185, 14);
+		Fee.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		Fee.setBounds(404, 218, 193, 29);
 		contentPane.add(Fee);
 		
 		Name = new JTextField();
-		Name.setBounds(175, 20, 171, 20);
+		Name.setBounds(404, 160, 171, 20);
 		contentPane.add(Name);
 		Name.setColumns(10);
 		
 		JLabel lblNewLabel_4 = new JLabel("Number");
-		lblNewLabel_4.setBounds(68, 168, 89, 14);
+		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewLabel_4.setBounds(146, 389, 118, 23);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel Number = new JLabel("");
-		Number.setBounds(185, 168, 89, 14);
+		Number.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		Number.setBounds(404, 389, 193, 23);
 		contentPane.add(Number);
 		JLabel lblNewLabel_1 = new JLabel("fee :");
-		lblNewLabel_1.setBounds(68, 76, 46, 14);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewLabel_1.setBounds(146, 214, 145, 23);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Doctor's Name :");
-		lblNewLabel_2.setBounds(68, 111, 111, 14);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewLabel_2.setBounds(146, 277, 167, 23);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Phone :");
-		lblNewLabel_3.setBounds(68, 143, 46, 14);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNewLabel_3.setBounds(146, 337, 118, 23);
 		contentPane.add(lblNewLabel_3);
 		
-		JButton btnNewButton = new JButton("Cancle");
+		JButton btnNewButton = new JButton("Back");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Receptionistmain RM=new Receptionistmain();
@@ -104,7 +116,7 @@ public class ReservationConfirm extends JFrame {
 				dispose(); 
 			}
 		});
-		btnNewButton.setBounds(68, 254, 89, 23);
+		btnNewButton.setBounds(296, 508, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Confirm");
@@ -132,7 +144,7 @@ public class ReservationConfirm extends JFrame {
 			}
 			
 		});
-		btnNewButton_1.setBounds(224, 254, 89, 23);
+		btnNewButton_1.setBounds(452, 508, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 		
@@ -159,8 +171,15 @@ public class ReservationConfirm extends JFrame {
 				} 
 			}
 		});
-		btnNewButton_2.setBounds(375, 19, 89, 23);
+		btnNewButton_2.setBounds(615, 159, 89, 23);
 		contentPane.add(btnNewButton_2);
+		
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5.setIcon(new ImageIcon(ReservationConfirm.class.getResource("/images/hospital.gif")));
+		lblNewLabel_5.setBounds(0, 0, 800, 600);
+		contentPane.add(lblNewLabel_5);
+		setUndecorated(true);
+		setLocationRelativeTo(null);
 		
 
 		

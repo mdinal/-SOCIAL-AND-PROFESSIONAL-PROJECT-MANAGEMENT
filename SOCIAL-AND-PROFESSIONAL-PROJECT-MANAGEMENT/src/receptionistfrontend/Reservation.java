@@ -19,12 +19,15 @@ import java.awt.event.ActionListener;
 import java.rmi.Naming;
 import java.util.List;
 import java.awt.event.ActionEvent;
+
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import objects.Doctor;
 import objects.Patient;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class Reservation extends JFrame {
 
@@ -60,62 +63,70 @@ public class Reservation extends JFrame {
 	 */
 	public Reservation() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 739, 465);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Doctor ID");
-		lblNewLabel.setBounds(43, 137, 86, 14);
+		lblNewLabel.setBounds(101, 269, 86, 14);
 		contentPane.add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(71, 21, 584, 79);
+		scrollPane.setBounds(71, 21, 644, 216);
 		contentPane.add(scrollPane);
 		
 		JLabel Error = new JLabel("");
 		Error.setForeground(Color.RED);
-		Error.setBounds(92, 328, 373, 14);
+		Error.setBounds(150, 460, 373, 14);
 		contentPane.add(Error);
 		
 		table = new JTable();
+		table.setDefaultEditor(Object.class, null);
+		table.setForeground(Color.black);
 		Object[] coumns = {"ID", "Name", "Number", "Specialist", "Fee"};
 		DefaultTableModel model =new DefaultTableModel();
 		model.setColumnIdentifiers(coumns);
 		scrollPane.setViewportView(table);
 		table.setModel(model);
 		
+		table.setOpaque(false);
+		((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
+		
+		scrollPane.setOpaque(false);
+		scrollPane.getViewport().setOpaque(false);
+		
 		DOD = new JTextField();
-		DOD.setBounds(161, 134, 250, 20);
+		DOD.setBounds(219, 266, 250, 20);
 		contentPane.add(DOD);
 		DOD.setColumns(10);
 		
 		JLabel lblPa = new JLabel("Patient  Name");
-		lblPa.setBounds(43, 182, 86, 14);
+		lblPa.setBounds(101, 314, 86, 14);
 		contentPane.add(lblPa);
 		
 		Name = new JTextField();
 		Name.setColumns(10);
-		Name.setBounds(161, 179, 250, 20);
+		Name.setBounds(219, 311, 250, 20);
 		contentPane.add(Name);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Age");
-		lblNewLabel_1_1.setBounds(43, 224, 46, 14);
+		lblNewLabel_1_1.setBounds(101, 356, 46, 14);
 		contentPane.add(lblNewLabel_1_1);
 		
 		Age = new JTextField();
 		Age.setColumns(10);
-		Age.setBounds(161, 221, 250, 20);
+		Age.setBounds(219, 353, 250, 20);
 		contentPane.add(Age);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Contact ");
-		lblNewLabel_1_1_1.setBounds(43, 273, 86, 14);
+		lblNewLabel_1_1_1.setBounds(101, 405, 86, 14);
 		contentPane.add(lblNewLabel_1_1_1);
 		
 		Phone = new JTextField();
 		Phone.setColumns(10);
-		Phone.setBounds(161, 270, 250, 20);
+		Phone.setBounds(219, 402, 250, 20);
 		contentPane.add(Phone);
 		
 		Object [] row=new Object[5];
@@ -156,7 +167,7 @@ public class Reservation extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(448, 178, 68, 23);
+		btnNewButton.setBounds(506, 310, 68, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Save");
@@ -184,10 +195,10 @@ public class Reservation extends JFrame {
 			}
 			
 		});
-		btnNewButton_1.setBounds(138, 358, 89, 23);
+		btnNewButton_1.setBounds(196, 490, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_1_1 = new JButton("Cancel");
+		JButton btnNewButton_1_1 = new JButton("Back");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Receptionistmain RM=new Receptionistmain();
@@ -197,7 +208,7 @@ public class Reservation extends JFrame {
 			}
 			
 		});
-		btnNewButton_1_1.setBounds(417, 358, 89, 23);
+		btnNewButton_1_1.setBounds(475, 490, 89, 23);
 		contentPane.add(btnNewButton_1_1);
 		
 		
@@ -242,8 +253,17 @@ public class Reservation extends JFrame {
 			}
 
 		});
-		Clear.setBounds(526, 178, 115, 23);
+		Clear.setBounds(584, 310, 115, 23);
 		contentPane.add(Clear);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(Reservation.class.getResource("/images/unimed-dribbble-gif-01.gif")));
+		lblNewLabel_1.setBounds(0, 0, 800, 600);
+		contentPane.add(lblNewLabel_1);
+		
+
+		setUndecorated(true);
+		setLocationRelativeTo(null);
 		
 		
 	}

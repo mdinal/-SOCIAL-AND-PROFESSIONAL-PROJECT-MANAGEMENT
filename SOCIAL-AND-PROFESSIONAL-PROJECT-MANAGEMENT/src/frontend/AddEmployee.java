@@ -32,6 +32,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class AddEmployee extends JFrame {
 
@@ -128,7 +129,7 @@ public class AddEmployee extends JFrame {
 		Position.setBounds(302, 316, 393, 20);
 		contentPane.add(Position);
 		
-		JButton btnNewButton = new JButton("Cancel");
+		JButton btnNewButton = new JButton("Back");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MainWindow MainWindow=new MainWindow();
@@ -184,6 +185,13 @@ public class AddEmployee extends JFrame {
 		);
 		btnSave.setBounds(441, 392, 89, 23);
 		contentPane.add(btnSave);
+		
+		JLabel lblNewLabel_6 = new JLabel("New label");
+		lblNewLabel_6.setIcon(new ImageIcon(AddEmployee.class.getResource("/images/dribble.gif")));
+		lblNewLabel_6.setBounds(0, 0, 800, 600);
+		contentPane.add(lblNewLabel_6);
+		setUndecorated(true);
+		setLocationRelativeTo(null);
 		
 		
 

@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.rmi.Naming;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class AddROmm extends JFrame {
 
@@ -116,6 +117,13 @@ public class AddROmm extends JFrame {
 		});
 		btnNewButton_1.setBounds(323, 340, 89, 23);
 		contentPane.add(btnNewButton_1);
+		
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(AddROmm.class.getResource("/images/hospital.gif")));
+		lblNewLabel_1.setBounds(0, 0, 800, 600);
+		contentPane.add(lblNewLabel_1);
+		setUndecorated(true);
+		setLocationRelativeTo(null);
 		
 		
 	}

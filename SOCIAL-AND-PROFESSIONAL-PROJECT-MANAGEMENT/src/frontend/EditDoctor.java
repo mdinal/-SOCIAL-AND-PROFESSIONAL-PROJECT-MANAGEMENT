@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import interfacePackage.Interface;
 import objects.Doctor;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.rmi.Naming;
@@ -53,60 +54,60 @@ public class EditDoctor extends JFrame {
 	 */
 	public EditDoctor() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 634, 355);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Name");
-		lblNewLabel.setBounds(88, 35, 46, 14);
+		lblNewLabel.setBounds(200, 109, 46, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Email");
-		lblNewLabel_1.setBounds(88, 73, 46, 14);
+		lblNewLabel_1.setBounds(200, 175, 46, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Phone");
-		lblNewLabel_2.setBounds(88, 115, 46, 14);
+		lblNewLabel_2.setBounds(200, 243, 46, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Address");
-		lblNewLabel_3.setBounds(88, 157, 46, 14);
+		lblNewLabel_3.setBounds(200, 309, 46, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Specialist ");
-		lblNewLabel_4.setBounds(88, 198, 70, 14);
+		lblNewLabel_4.setBounds(200, 375, 70, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		Name = new JTextField();
-		Name.setBounds(179, 32, 138, 20);
+		Name.setBounds(291, 106, 263, 20);
 		contentPane.add(Name);
 		Name.setColumns(10);
 		
 		Email = new JTextField();
 		Email.setColumns(10);
-		Email.setBounds(179, 70, 138, 20);
+		Email.setBounds(291, 172, 263, 20);
 		contentPane.add(Email);
 		
 		Phone = new JTextField();
 		Phone.setColumns(10);
-		Phone.setBounds(179, 112, 138, 20);
+		Phone.setBounds(291, 240, 263, 20);
 		contentPane.add(Phone);
 		
 		Address = new JTextField();
 		Address.setColumns(10);
-		Address.setBounds(179, 154, 138, 20);
+		Address.setBounds(291, 306, 263, 20);
 		contentPane.add(Address);
 		
 		Specialist = new JTextField();
 		Specialist.setColumns(10);
-		Specialist.setBounds(179, 195, 138, 20);
+		Specialist.setBounds(291, 372, 263, 20);
 		contentPane.add(Specialist);
 		
 		JLabel Error = new JLabel("");
 		Error.setForeground(Color.RED);
-		Error.setBounds(179, 232, 250, 14);
+		Error.setBounds(255, 440, 315, 14);
 		contentPane.add(Error);
 		
 		btnNewButton = new JButton("Update");
@@ -141,7 +142,7 @@ public class EditDoctor extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(103, 264, 89, 23);
+		btnNewButton.setBounds(215, 510, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		btnDelete = new JButton("Delete");
@@ -171,10 +172,10 @@ public class EditDoctor extends JFrame {
 				}
 			}
 		});
-		btnDelete.setBounds(243, 264, 89, 23);
+		btnDelete.setBounds(355, 510, 89, 23);
 		contentPane.add(btnDelete);
 		
-		btnCancle = new JButton("Cancle");
+		btnCancle = new JButton("Back");
 		btnCancle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainWindow MainWindow=new MainWindow();
@@ -183,7 +184,7 @@ public class EditDoctor extends JFrame {
 				dispose(); 
 			}
 		});
-		btnCancle.setBounds(391, 264, 89, 23);
+		btnCancle.setBounds(503, 510, 89, 23);
 		contentPane.add(btnCancle);
 		
 		btnFind = new JButton("Find");
@@ -210,8 +211,15 @@ public class EditDoctor extends JFrame {
 				}
 			}
 		});
-		btnFind.setBounds(357, 31, 89, 23);
+		btnFind.setBounds(589, 105, 89, 23);
 		contentPane.add(btnFind);
 		
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5.setIcon(new ImageIcon(DoctorAdd.class.getResource("/images/HandmadeUltimateHoneybee-size_restricted.gif")));
+		lblNewLabel_5.setBounds(0, 0, 800,600);
+		contentPane.add(lblNewLabel_5);
+		
+		setUndecorated(true);
+		setLocationRelativeTo(null);
 	}
 }

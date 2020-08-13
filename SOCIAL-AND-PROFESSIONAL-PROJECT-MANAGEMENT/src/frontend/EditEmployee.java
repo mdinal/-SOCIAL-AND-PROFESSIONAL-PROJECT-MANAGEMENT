@@ -21,6 +21,7 @@ import interfacePackage.Interface;
 import objects.Doctor;
 import objects.Empolyee;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.rmi.Naming;
@@ -61,68 +62,68 @@ public class EditEmployee extends JFrame {
 	 */
 	public EditEmployee() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 584, 430);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Name");
-		lblNewLabel.setBounds(53, 32, 46, 14);
+		lblNewLabel.setBounds(173, 57, 46, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Date of birth");
-		lblNewLabel_1.setBounds(53, 70, 82, 14);
+		lblNewLabel_1.setBounds(173, 125, 82, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Address");
-		lblNewLabel_2.setBounds(53, 108, 46, 14);
+		lblNewLabel_2.setBounds(173, 179, 46, 14);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Phone");
-		lblNewLabel_3.setBounds(53, 148, 46, 14);
+		lblNewLabel_3.setBounds(173, 258, 46, 14);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("NIC");
-		lblNewLabel_4.setBounds(53, 178, 46, 14);
+		lblNewLabel_4.setBounds(173, 327, 46, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Position");
-		lblNewLabel_5.setBounds(53, 214, 46, 14);
+		lblNewLabel_5.setBounds(173, 381, 46, 14);
 		contentPane.add(lblNewLabel_5);
 		
 		Name = new JTextField();
-		Name.setBounds(156, 29, 191, 20);
+		Name.setBounds(276, 54, 191, 20);
 		contentPane.add(Name);
 		Name.setColumns(10);
 		
 		Address = new JTextField();
 		Address.setColumns(10);
-		Address.setBounds(156, 105, 191, 20);
+		Address.setBounds(276, 176, 347, 57);
 		contentPane.add(Address);
 		
 		Phone = new JTextField();
 		Phone.setColumns(10);
-		Phone.setBounds(156, 145, 191, 20);
+		Phone.setBounds(276, 255, 191, 20);
 		contentPane.add(Phone);
 		
 		NIC = new JTextField();
 		NIC.setColumns(10);
-		NIC.setBounds(156, 175, 191, 20);
+		NIC.setBounds(276, 324, 191, 20);
 		contentPane.add(NIC);
 		
 		JDateChooser Date = new JDateChooser();
-		Date.setBounds(156, 70, 191, 20);
+		Date.setBounds(276, 125, 191, 20);
 		contentPane.add(Date);
 		
 		JLabel Error = new JLabel("");
 		Error.setForeground(Color.RED);
-		Error.setBounds(156, 255, 191, 14);
+		Error.setBounds(276, 261, 191, 14);
 		contentPane.add(Error);
 		
 		JSpinner Position = new JSpinner();
 		Position.setModel(new SpinnerListModel(new String[] {"receptionist", "nurse"}));
-		Position.setBounds(156, 214, 194, 20);
+		Position.setBounds(276, 381, 194, 20);
 		contentPane.add(Position);
 		
 		btnNewButton = new JButton("Update");
@@ -159,7 +160,7 @@ public class EditEmployee extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(103, 311, 89, 23);
+		btnNewButton.setBounds(234, 492, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		btnDelete = new JButton("Delete");
@@ -188,10 +189,10 @@ public class EditEmployee extends JFrame {
 				}
 			}
 		});
-		btnDelete.setBounds(243, 311, 89, 23);
+		btnDelete.setBounds(374, 492, 89, 23);
 		contentPane.add(btnDelete);
 		
-		btnCancle = new JButton("Cancle");
+		btnCancle = new JButton("Back");
 		btnCancle.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MainWindow MainWindow=new MainWindow();
@@ -200,7 +201,7 @@ public class EditEmployee extends JFrame {
 				dispose(); 
 			}
 		});
-		btnCancle.setBounds(391, 311, 89, 23);
+		btnCancle.setBounds(522, 492, 89, 23);
 		contentPane.add(btnCancle);
 	
 		
@@ -230,9 +231,15 @@ public class EditEmployee extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(387, 28, 89, 23);
+		btnNewButton.setBounds(507, 53, 89, 23);
 		contentPane.add(btnNewButton);
 
+		JLabel lblNewLabel_6 = new JLabel("New label");
+		lblNewLabel_6.setIcon(new ImageIcon(AddEmployee.class.getResource("/images/dribble.gif")));
+		lblNewLabel_6.setBounds(0, 0, 800, 600);
+		contentPane.add(lblNewLabel_6);
+		setUndecorated(true);
+		setLocationRelativeTo(null);
 	}
 
 }

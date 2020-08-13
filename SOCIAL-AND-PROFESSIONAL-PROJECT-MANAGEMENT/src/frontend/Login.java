@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.rmi.Naming;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public class Login extends JFrame {
 
@@ -63,7 +64,7 @@ public class Login extends JFrame {
 		
 		JLabel ErrorMsg = new JLabel("");
 		ErrorMsg.setForeground(Color.RED);
-		ErrorMsg.setBounds(109, 144, 208, 14);
+		ErrorMsg.setBounds(248, 359, 378, 14);
 		contentPane.add(ErrorMsg);
 		
 		Username = new JTextField();
@@ -96,8 +97,8 @@ public class Login extends JFrame {
 							 
 							 Receptionistmain RM=new Receptionistmain();
 							 RM.setVisible(true);
-							setVisible(false);
-							dispose(); 
+							 setVisible(false);
+							 dispose(); 
 						 }else if(re==3){
 							 DoctorMain DM=new DoctorMain();
 							 DM.setVisible(true);
@@ -116,6 +117,13 @@ public class Login extends JFrame {
 		});
 		btnNewButton.setBounds(412, 398, 160, 23);
 		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon(Login.class.getResource("/images/hospital_icon.gif")));
+		lblNewLabel_2.setBounds(0, 0, 800, 600);
+		contentPane.add(lblNewLabel_2);
+		
+		
 		
 		
 	}

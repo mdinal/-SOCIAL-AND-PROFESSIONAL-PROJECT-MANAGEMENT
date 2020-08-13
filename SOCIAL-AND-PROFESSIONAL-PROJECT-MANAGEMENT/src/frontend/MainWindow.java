@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class MainWindow extends JFrame {
 
@@ -35,7 +37,7 @@ public class MainWindow extends JFrame {
 	 */
 	public MainWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -50,7 +52,7 @@ public class MainWindow extends JFrame {
 				dispose(); 
 			}
 		});
-		AddDoctor.setBounds(147, 11, 125, 23);
+		AddDoctor.setBounds(294, 193, 246, 23);
 		contentPane.add(AddDoctor);
 		
 		JButton btnNewButton = new JButton("New button");
@@ -66,7 +68,7 @@ public class MainWindow extends JFrame {
 				dispose(); 
 			}
 		});
-		btnAddEmployee.setBounds(147, 51, 125, 23);
+		btnAddEmployee.setBounds(294, 243, 246, 23);
 		contentPane.add(btnAddEmployee);
 		
 		JButton btnAddRoom = new JButton("Add Room");
@@ -78,7 +80,7 @@ public class MainWindow extends JFrame {
 				dispose(); 
 			}
 		});
-		btnAddRoom.setBounds(147, 91, 125, 23);
+		btnAddRoom.setBounds(294, 289, 246, 23);
 		contentPane.add(btnAddRoom);
 		
 		JButton btnEditDoctor = new JButton("Edit Doctor");
@@ -91,7 +93,7 @@ public class MainWindow extends JFrame {
 			}
 			
 		});
-		btnEditDoctor.setBounds(147, 133, 125, 23);
+		btnEditDoctor.setBounds(294, 331, 246, 23);
 		contentPane.add(btnEditDoctor);
 		
 		JButton btnEditemployee = new JButton("Edit Employee");
@@ -103,7 +105,7 @@ public class MainWindow extends JFrame {
 				dispose(); 
 			}
 		});
-		btnEditemployee.setBounds(147, 178, 125, 23);
+		btnEditemployee.setBounds(294, 383, 246, 23);
 		contentPane.add(btnEditemployee);
 		
 		JButton btnNewButton_1 = new JButton("Log Out");
@@ -115,7 +117,7 @@ public class MainWindow extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_1.setBounds(315, 227, 89, 23);
+		btnNewButton_1.setBounds(651, 55, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Ambulance");
@@ -127,7 +129,15 @@ public class MainWindow extends JFrame {
 				dispose();
 			}
 		});
-		btnNewButton_2.setBounds(147, 212, 125, 23);
+		btnNewButton_2.setBounds(294, 438, 246, 23);
 		contentPane.add(btnNewButton_2);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(MainWindow.class.getResource("/images/medical_building_800x600.gif")));
+		lblNewLabel.setBounds(0, 0, 800, 600);
+		contentPane.add(lblNewLabel);
+		
+		setUndecorated(true);
+		setLocationRelativeTo(null);
 	}
 }

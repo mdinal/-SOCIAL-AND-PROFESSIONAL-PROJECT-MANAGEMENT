@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import frontend.Login;
@@ -24,6 +25,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 public class DoctorList extends JFrame {
 
@@ -54,14 +56,14 @@ public class DoctorList extends JFrame {
 	 */
 	public DoctorList() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 473, 388);
+		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		RoomID = new JLabel("");
-		RoomID.setBounds(10, 15, 46, 14);
+		RoomID.setBounds(50, 29, 46, 14);
 		contentPane.add(RoomID);
 		
 		JButton btnNewButton = new JButton("Log Out");
@@ -82,40 +84,47 @@ public class DoctorList extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(335, 11, 89, 23);
+		btnNewButton.setBounds(652, 29, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 53, 381, 75);
+		scrollPane.setBounds(86, 93, 608, 179);
 		contentPane.add(scrollPane);
 		
 		JLabel Error = new JLabel("");
 		Error.setForeground(Color.RED);
-		Error.setBounds(96, 273, 215, 14);
+		Error.setBounds(237, 491, 369, 14);
 		contentPane.add(Error);
 		
 		table = new JTable();
+		table.setForeground(Color.WHITE);
 		Object[] coumns = {"ID", "Name", "Number","Age"};
 		DefaultTableModel model =new DefaultTableModel();
 		model.setColumnIdentifiers(coumns);
 		scrollPane.setViewportView(table);
 		table.setModel(model);
 		
+		table.setOpaque(false);
+		((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
+		
+		scrollPane.setOpaque(false);
+		scrollPane.getViewport().setOpaque(false);
+		
 		JLabel lblNewLabel = new JLabel("ID");
-		lblNewLabel.setBounds(50, 159, 46, 14);
+		lblNewLabel.setBounds(191, 341, 46, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Details");
-		lblNewLabel_1.setBounds(50, 197, 46, 14);
+		lblNewLabel_1.setBounds(191, 379, 46, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		ID = new JTextField();
-		ID.setBounds(139, 156, 86, 20);
+		ID.setBounds(280, 338, 86, 20);
 		contentPane.add(ID);
 		ID.setColumns(10);
 		
 		Details = new JTextField();
-		Details.setBounds(139, 194, 263, 68);
+		Details.setBounds(280, 376, 414, 96);
 		contentPane.add(Details);
 		Details.setColumns(10);
 		
@@ -136,7 +145,7 @@ public class DoctorList extends JFrame {
 			}
 		});
 		
-		btnNewButton_1.setBounds(235, 155, 89, 23);
+		btnNewButton_1.setBounds(376, 337, 89, 23);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Save");
@@ -172,8 +181,10 @@ public class DoctorList extends JFrame {
 				}
 			}
 		});
-		btnNewButton_2.setBounds(311, 315, 89, 23);
+		btnNewButton_2.setBounds(627, 514, 89, 23);
 		contentPane.add(btnNewButton_2);
+		
+	
 		
 	
 		Object [] row=new Object[4];
@@ -199,6 +210,13 @@ public class DoctorList extends JFrame {
 		}catch(Exception ed){
 			System.out.print(ed);
 		}
-
+		
+		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setIcon(new ImageIcon(DoctorList.class.getResource("/images/33ba21ccda561739ab950d66e5616b82.gif")));
+		lblNewLabel_2.setBounds(0, 0, 800, 600);
+		contentPane.add(lblNewLabel_2);
+		
+		setUndecorated(true);
+		setLocationRelativeTo(null);
 	}
 }

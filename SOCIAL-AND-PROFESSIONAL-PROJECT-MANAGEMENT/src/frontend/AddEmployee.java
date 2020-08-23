@@ -33,6 +33,8 @@ import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AddEmployee extends JFrame {
 
@@ -41,6 +43,7 @@ public class AddEmployee extends JFrame {
 	private JTextField Address;
 	private JTextField Phone;
 	private JTextField NIC;
+	private JTextField Email;
 
 	/**
 	 * Launch the application.
@@ -104,6 +107,15 @@ public class AddEmployee extends JFrame {
 		contentPane.add(Address);
 		
 		Phone = new JTextField();
+		Phone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+				char c=arg0.getKeyChar();
+				if(!(Character.isDigit(c) ||(c==KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_DELETE))) {
+					arg0.consume();
+				}
+			}
+		});
 		Phone.setColumns(10);
 		Phone.setBounds(302, 247, 393, 20);
 		contentPane.add(Phone);
@@ -117,9 +129,18 @@ public class AddEmployee extends JFrame {
 		Date.setBounds(302, 172, 393, 20);
 		contentPane.add(Date);
 		
+		JLabel lblNewLabel_7 = new JLabel("Email");
+		lblNewLabel_7.setBounds(92, 354, 46, 14);
+		contentPane.add(lblNewLabel_7);
+		
+		Email = new JTextField();
+		Email.setColumns(10);
+		Email.setBounds(302, 364, 393, 20);
+		contentPane.add(Email);
+		
 		JLabel Error = new JLabel("");
 		Error.setForeground(Color.RED);
-		Error.setBounds(195, 354, 191, 14);
+		Error.setBounds(193, 422, 191, 14);
 		contentPane.add(Error);
 		
 	
@@ -138,7 +159,7 @@ public class AddEmployee extends JFrame {
 				dispose(); 
 			}
 		});
-		btnNewButton.setBounds(314, 392, 89, 23);
+		btnNewButton.setBounds(312, 460, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		JButton btnSave = new JButton("Save");
@@ -156,35 +177,40 @@ public class AddEmployee extends JFrame {
 					Error.setText("please enter vaild phone number");
 				}else if(!(NIC.getText().contains("V") || NIC.getText().contains("V"))){
 					Error.setText("please enter vaild NIC number");
-				}else {
-					try {
-						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
-						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
-						String StringDate=dateFormat.format(Date.getDate());  
-						Empolyee E=new Empolyee(Name.getText(),StringDate,Address.getText(),Integer.parseInt(Phone.getText()),NIC.getText(),Position.getValue().toString());
-						boolean re=lg.AddEmployee(E);
-						if(re==true) {
-							JOptionPane.showMessageDialog(null, "Employee Saved Successfully");
-							Name.setText("");
-							Address.setText("");
-							Phone.setText("");
-							NIC.setText("");
-							Error.setText("");
-							
-						}else
-						{
-							Error.setText("Employee not Saved");
-							
-						}
-					}catch(Exception ed){
-						System.out.print(ed);
-					}  
+				}else if(Email.getText().isEmpty()) {
+						Error.setText("please enter Email");
+					}else {
+						try {
+							Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
+							DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+							String StringDate=dateFormat.format(Date.getDate());  
+							Empolyee E=new Empolyee(Name.getText(),StringDate,Address.getText(),Integer.parseInt(Phone.getText()),NIC.getText(),Position.getValue().toString(),Email.getText());
+							boolean re=lg.AddEmployee(E);
+							if(re==true) {
+								JOptionPane.showMessageDialog(null, "Employee Saved Successfully");
+								Name.setText("");
+								Address.setText("");
+								Phone.setText("");
+								NIC.setText("");
+								Email.setText("");
+								Error.setText("");
+								
+							}else
+							{
+								Error.setText("Employee not Saved");
+								
+							}
+						}catch(Exception ed){
+							System.out.print(ed);
+						}  
 					}
 				}
 			}
 		);
-		btnSave.setBounds(441, 392, 89, 23);
+		btnSave.setBounds(439, 460, 89, 23);
 		contentPane.add(btnSave);
+		
+
 		
 		JLabel lblNewLabel_6 = new JLabel("New label");
 		lblNewLabel_6.setIcon(new ImageIcon(AddEmployee.class.getResource("/images/dribble.gif")));

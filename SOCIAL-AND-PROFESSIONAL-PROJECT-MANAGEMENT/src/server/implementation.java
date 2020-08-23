@@ -9,10 +9,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 
 import interfacePackage.Interface;
 import objects.Doctor;
 import objects.Empolyee;
+import objects.Item;
 import objects.Log;
 import objects.Patient;
 import objects.Reservation;
@@ -24,6 +27,7 @@ import security.encryptionClass;
 public class implementation extends UnicastRemoteObject implements Interface{
 
 	Log userCurrent=new Log();
+	String RoomID;
 	protected implementation() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
@@ -61,8 +65,14 @@ public class implementation extends UnicastRemoteObject implements Interface{
 					ResultSet rs1=st1.executeQuery(SQL1);
 					if(rs1.next()) {
 
-//						Data.setID(rs.getString("ID"));
+						Data.setID(rs1.getString("ID"));
+						Empolyee e=new Empolyee();
+						e.setName(rs1.getString("Name"));
+						e.setID(Integer.parseInt(rs1.getString("ID")));
+						e.setPosition(rs1.getString("Position"));
+						Data.setE(e);
 						Data.setReturn("2");
+						userCurrent=Data;
 						return Data;
 					}else {
 						try {
@@ -104,7 +114,7 @@ public class implementation extends UnicastRemoteObject implements Interface{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
 			Statement st=con.createStatement();
-			String Sql="INSERT INTO `doctor` (`Name`, `Email`, `Phone`, `Address`, `Specialist`, `ID`) VALUES ('"+D.getName()+"', '"+D.getEmail()+"', '"+D.getPhone()+"', '"+D.getAddress()+"', '"+D.getSpecialist()+"', NULL); ";
+			String Sql="INSERT INTO `doctor` (`Name`, `Email`, `Phone`, `Address`, `Specialist`, `ID`) VALUES ('"+D.getName()+"', '"+D.getEmail().toLowerCase()+"', '"+D.getPhone()+"', '"+D.getAddress()+"', '"+D.getSpecialist()+"', NULL); ";
 			
 			int q = st.executeUpdate(Sql);
 			if(q==1 || q==2) {
@@ -126,7 +136,7 @@ public class implementation extends UnicastRemoteObject implements Interface{
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
 			Statement st=con.createStatement();
-			String Sql="INSERT INTO `employee` (`ID`, `Name`, `Date of Birth`, `Address`, `Phone`, `NIC`, `Position`,`Password`) VALUES (NULL, '"+E.getName()+"', '"+E.getDateofbirth()+"', '"+E.getAddress()+"', '"+E.getPhone()+"', '"+E.getNIC()+"', '"+E.getPosition()+"','8mzCNJUNtvSJJSpQl9fUJg==');";
+			String Sql="INSERT INTO `employee` (`ID`, `Name`, `Date of Birth`, `Address`, `Phone`, `NIC`, `Position`,`Password`,`Email`) VALUES (NULL, '"+E.getName()+"', '"+E.getDateofbirth()+"', '"+E.getAddress()+"', '"+E.getPhone()+"', '"+E.getNIC()+"', '"+E.getPosition()+"','8mzCNJUNtvSJJSpQl9fUJg==','"+E.getEmail().toLowerCase()+"');";
 			int q = st.executeUpdate(Sql);
 			if(q==1 || q==2) {
 				return true;
@@ -298,6 +308,7 @@ public class implementation extends UnicastRemoteObject implements Interface{
 				E.setPhone(Integer.parseInt(rs.getString("Phone")));
 				E.setNIC(rs.getString("NIC"));
 				E.setPosition(rs.getString("Position"));
+				E.setEmail(rs.getString("Email"));
 				
 			}
 		
@@ -386,7 +397,7 @@ public class implementation extends UnicastRemoteObject implements Interface{
 		      "UPDATE doctor SET Name = ?, Email = ?,Phone =?,Address=?,Specialist=? WHERE ID = ?");
 
 		    ps.setString(1,D.getName());
-		    ps.setString(2,D.getEmail());
+		    ps.setString(2,D.getEmail().toLowerCase());
 		    ps.setInt(3,D.getPhone());
 		    ps.setString(4, D.getAddress());
 		    ps.setString(5,D.getSpecialist());
@@ -433,7 +444,7 @@ public class implementation extends UnicastRemoteObject implements Interface{
 			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
 
 		    PreparedStatement ps = con.prepareStatement(
-		      "UPDATE `employee` SET `Name` = ?, `Date of Birth` = ?,`Address`=?,`Phone`=?,`NIC`=?,`Position`=? WHERE `ID` = ?");
+		      "UPDATE `employee` SET `Name` = ?, `Date of Birth` = ?,`Address`=?,`Phone`=?,`NIC`=?,`Position`=?,`Email`=? WHERE `ID` = ?");
 
 		    ps.setString(1,E.getName());
 		    ps.setString(2,E.getDateofbirth());
@@ -441,7 +452,8 @@ public class implementation extends UnicastRemoteObject implements Interface{
 		    ps.setInt(4,E.getPhone());
 		    ps.setString(5,E.getNIC());
 		    ps.setString(6, E.getPosition());
-		    ps.setInt(7, E.getID());
+		    ps.setString(7, E.getEmail().toLowerCase());
+		    ps.setInt(8, E.getID());
 
 		    ps.executeUpdate();
 		    ps.close();
@@ -749,6 +761,273 @@ public class implementation extends UnicastRemoteObject implements Interface{
 			  return false;
 		  }
 		return true;
+	}
+	public boolean updateEbyName(String D,String Name) throws RemoteException {
+		// TODO Auto-generated method stub
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "UPDATE `employee` SET `Name`=? WHERE ID=?");
+
+		    ps.setString(1,Name);
+		    ps.setString(2,D);
+
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	public boolean updateEbyNamePassword(String D,String Name,String Password) throws RemoteException {
+		// TODO Auto-generated method stub
+		encryptionClass encryption = null;
+		try {
+			encryption = new encryptionClass();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    String encryptionpassword=encryption.encrypt(Password);
+
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "UPDATE `employee` SET `Name`=? , `Password`=? WHERE ID=?");
+
+		    ps.setString(1,Name);
+		    ps.setString(2,encryptionpassword);
+		    ps.setString(3, D);
+
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	public String getroomID()throws RemoteException{
+		return RoomID;	
+	}
+	public void setroomID(String ID)throws RemoteException{
+		RoomID=ID;
+	}
+	public boolean updateDbyName(String D,String Name) throws RemoteException {
+		// TODO Auto-generated method stub
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "UPDATE `doctor` SET `Name`=? WHERE ID=?");
+
+		    ps.setString(1,Name);
+		    ps.setString(2,D);
+
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	public boolean updateDbyNamePassword(String D,String Name,String Password) throws RemoteException {
+		// TODO Auto-generated method stub
+		encryptionClass encryption = null;
+		try {
+			encryption = new encryptionClass();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    String encryptionpassword=encryption.encrypt(Password);
+
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "UPDATE `doctor` SET `Name`=? , `Password`=? WHERE ID=?");
+
+		    ps.setString(1,Name);
+		    ps.setString(2,encryptionpassword);
+		    ps.setString(3, D);
+
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	public int resetpassword(String Email)throws RemoteException{
+		String ID;
+		int re=-1;
+		int code;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+			Statement st=con.createStatement();
+			String SQL="SELECT * FROM doctor WHERE Email='"+Email.toLowerCase()+"' ";
+			ResultSet rs=st.executeQuery(SQL);
+			if(rs.next()) {
+				ID=rs.getString("ID");
+				System.out.print(ID);
+				re=1;
+			}else {
+				try {
+					Class.forName("com.mysql.jdbc.Driver");
+					Connection con1=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+					Statement st1=con1.createStatement();
+					String SQL1="SELECT * FROM employee WHERE Email='"+Email.toLowerCase()+"' ";
+					ResultSet rs1=st1.executeQuery(SQL1);
+					if(rs1.next()) {
+						ID=rs1.getString("ID");
+						System.out.print(ID);
+						re=2;
+					}
+				}catch (Exception se){
+					  System.out.print(se);
+				  }
+			}
+		
+		}catch (Exception se){
+			  System.out.print(se);
+		  }
+		try {
+			Random rand=new Random();
+			code=rand.nextInt(999999);
+			String host="smtp.mail.yahoo.com";
+			String user="infohospitalrecovery@yahoo.com";
+			String pass="#batman1234";
+			String subject="Reseting Code";
+			String message="Your reset Code is :"+code;
+			boolean sessuinDebug=false;
+			Properties pros=System.getProperties();
+			pros.put("mail.smtp.starttls.enable", "true");
+			pros.put("mail.smtp.host", "465");
+			pros.put("mail.smtp.auth","true");
+			pros.put("mail.smtp.starttls.required","true");
+			
+		}catch (Exception se){
+			  System.out.print(se);
+		  }
+		return re;
+		
+	}
+	public boolean additem(Item V) throws RemoteException {
+		// TODO Auto-generated method stub
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "INSERT INTO item (ID, Name, Quantity) VALUES (NULL, ?, ?);");
+
+		    ps.setString(1,V.getName());
+		    ps.setString(2, V.getQuantity());
+
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	public boolean EditItem(Item V) throws RemoteException {
+		// TODO Auto-generated method stub
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "UPDATE `item` SET `Name`=?,`Quantity`=? WHERE ID=?");
+
+		    ps.setString(1,V.getName());
+		    ps.setString(2,V.getQuantity());
+		    ps.setString(3,V.getID());
+
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	
+	public boolean DeleteItem(String V) throws RemoteException {
+		// TODO Auto-generated method stub
+		  try
+		  {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+		    PreparedStatement ps = con.prepareStatement(
+		      "DELETE FROM `item` WHERE ID=?");
+
+		    ps.setString(1,V);
+		    ps.executeUpdate();
+		    ps.close();
+		  }
+		  catch (Exception se)
+		  {
+			  System.out.print(se);
+			  return false;
+		  }
+		return true;
+	}
+	public List Itemlist()throws RemoteException {
+
+		List<Item> list= new ArrayList<Item>();
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+			Statement st=con.createStatement();
+			String SQL="SELECT * FROM `item`";
+			ResultSet rs=st.executeQuery(SQL);
+			
+			while(rs.next()) {
+				Item V=new Item();
+				V.setName(rs.getString("Name"));
+				V.setID(rs.getString("ID"));
+				V.setQuantity(rs.getString("Quantity"));
+				list.add(V);
+			}
+		
+		}catch (Exception e){
+		      System.err.println(e.getMessage());
+		    }
+		return list;
+		
 	}
 
 }

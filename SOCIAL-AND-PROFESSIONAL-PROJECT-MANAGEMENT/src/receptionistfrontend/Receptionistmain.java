@@ -9,12 +9,18 @@ import javax.swing.border.EmptyBorder;
 
 import frontend.Login;
 import frontend.MainWindow;
+import interfacePackage.Interface;
+import objects.Log;
+import shared.Password;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.rmi.Naming;
 
 public class Receptionistmain extends JFrame {
 
@@ -106,6 +112,19 @@ public class Receptionistmain extends JFrame {
 		});
 		btnNewButton_2.setBounds(201, 362, 357, 23);
 		contentPane.add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("Profile");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Password p=new Password();
+				p.setVisible(true);
+				setVisible(false);
+				dispose();
+			}
+		});
+		btnNewButton_3.setBounds(41, 46, 105, 38);
+		contentPane.add(btnNewButton_3);
+		
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(Receptionistmain.class.getResource("/images/dribbble_2.gif")));

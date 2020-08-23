@@ -11,11 +11,12 @@ public class Empolyee implements Serializable {
 	int Phone ;
 	String NIC;
 	String Position;
+	String Email;
 	
 	public Empolyee() {
 		super();
 	}
-	public Empolyee(String name, String dateofbirth, String address, int phone, String nIC, String position) {
+	public Empolyee(String name, String dateofbirth, String address, int phone, String nIC, String position,String email) {
 		super();
 		Name = name;
 		Dateofbirth = dateofbirth;
@@ -23,8 +24,15 @@ public class Empolyee implements Serializable {
 		Phone = phone;
 		NIC = nIC;
 		Position = position;
+		Email=email;
 	}
 	
+	public String getEmail() {
+		return Email;
+	}
+	public void setEmail(String email) {
+		Email = email;
+	}
 	public int getID() {
 		return ID;
 	}

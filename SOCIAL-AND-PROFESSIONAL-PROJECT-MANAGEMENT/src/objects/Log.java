@@ -6,7 +6,14 @@ public class Log implements Serializable {
 	String Return;
 	String ID;
 	Doctor D;
+	Empolyee E;
 	
+	public Empolyee getE() {
+		return E;
+	}
+	public void setE(Empolyee e) {
+		E = e;
+	}
 	public Doctor getD() {
 		return D;
 	}

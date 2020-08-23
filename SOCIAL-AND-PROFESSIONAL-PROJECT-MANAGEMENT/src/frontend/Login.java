@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import guidoctor.DoctorMain;
 import interfacePackage.Interface;
+import nurse.Nurse;
 import objects.Log;
 import receptionistfrontend.Receptionistmain;
 
@@ -20,6 +21,8 @@ import java.awt.event.ActionListener;
 import java.rmi.Naming;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Login extends JFrame {
 
@@ -94,11 +97,19 @@ public class Login extends JFrame {
 								setVisible(false);
 								dispose(); 
 						 }else if(re==2) {
-							 
-							 Receptionistmain RM=new Receptionistmain();
-							 RM.setVisible(true);
-							 setVisible(false);
-							 dispose(); 
+							 String type=res.getE().getPosition();
+							 if(type.compareTo("receptionist")==0) {
+								 Receptionistmain RM=new Receptionistmain();
+								 RM.setVisible(true);
+								 setVisible(false);
+								 dispose(); 
+							 }else if(type.compareTo("nurse")==0) {
+								 Nurse n=new Nurse();
+								 n.setVisible(true);
+								 setVisible(false);
+								 dispose();
+							 }
+
 						 }else if(re==3){
 							 DoctorMain DM=new DoctorMain();
 							 DM.setVisible(true);
@@ -117,6 +128,20 @@ public class Login extends JFrame {
 		});
 		btnNewButton.setBounds(412, 398, 160, 23);
 		contentPane.add(btnNewButton);
+		
+		JLabel lblNewLabel_3 = new JLabel("Forgot Password ");
+		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				lblNewLabel_3.setForeground(Color.BLUE);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblNewLabel_3.setForeground(Color.black);
+			}
+		});
+		lblNewLabel_3.setBounds(248, 402, 121, 14);
+		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_2 = new JLabel("New label");
 		lblNewLabel_2.setIcon(new ImageIcon(Login.class.getResource("/images/hospital_icon.gif")));

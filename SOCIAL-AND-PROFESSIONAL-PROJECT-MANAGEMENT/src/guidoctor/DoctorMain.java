@@ -87,9 +87,9 @@ public class DoctorMain extends JFrame {
 					String st=Nu.getSelectedItem().toString();
 					String ID=st.substring(st.lastIndexOf("=") + 1);
 					boolean re=lg.updateRoom(ID);
+					lg.setroomID(ID);
 					if(re) {
 						DoctorList D=new DoctorList();
-						D.RoomID.setText(ID);
 						D.setVisible(true);
 						setVisible(false);
 						dispose(); 

@@ -19,6 +19,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.rmi.Naming;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class EditDoctor extends JFrame {
 
@@ -91,6 +93,15 @@ public class EditDoctor extends JFrame {
 		contentPane.add(Email);
 		
 		Phone = new JTextField();
+		Phone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if(!(Character.isDigit(c) ||(c==KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_DELETE))) {
+					e.consume();
+				}
+			}
+		});
 		Phone.setColumns(10);
 		Phone.setBounds(291, 240, 263, 20);
 		contentPane.add(Phone);

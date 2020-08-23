@@ -19,6 +19,8 @@ import java.rmi.Naming;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AddROmm extends JFrame {
 
@@ -58,11 +60,29 @@ public class AddROmm extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		Number = new JTextField();
+		Number.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if(!(Character.isDigit(c) ||(c==KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_DELETE))) {
+					e.consume();
+				}
+			}
+		});
 		Number.setBounds(375, 176, 182, 20);
 		contentPane.add(Number);
 		Number.setColumns(10);
 		
 		Floor = new JTextField();
+		Floor.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if(!(Character.isDigit(c) ||(c==KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_DELETE))) {
+					e.consume();
+				}
+			}
+		});
 		Floor.setColumns(10);
 		Floor.setBounds(375, 223, 182, 20);
 		contentPane.add(Floor);

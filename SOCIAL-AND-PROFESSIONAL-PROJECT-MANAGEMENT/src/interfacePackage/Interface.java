@@ -6,6 +6,7 @@ import java.util.List;
 
 import objects.Doctor;
 import objects.Empolyee;
+import objects.Item;
 import objects.Log;
 import objects.Patient;
 import objects.Reservation;
@@ -42,5 +43,16 @@ public interface Interface extends Remote {
 	public List Vehiclelist()throws RemoteException;
 	public boolean VehicleAvailable(String D) throws RemoteException;
 	public boolean VehicleUnavailable(String D) throws RemoteException;
+	public boolean updateEbyName(String D,String Name) throws RemoteException;
+	public boolean updateEbyNamePassword(String D,String Name,String Password) throws RemoteException;
+	public String getroomID()throws RemoteException;
+	public void setroomID(String ID)throws RemoteException;
+	public boolean updateDbyName(String D,String Name) throws RemoteException;
+	public boolean updateDbyNamePassword(String D,String Name,String Password) throws RemoteException;
+	public int resetpassword(String Email)throws RemoteException;
+	public boolean additem(Item V) throws RemoteException  ;
+	public boolean EditItem(Item V) throws RemoteException;
+	public boolean DeleteItem(String V) throws RemoteException;
+	public List Itemlist()throws RemoteException;
 	
 }

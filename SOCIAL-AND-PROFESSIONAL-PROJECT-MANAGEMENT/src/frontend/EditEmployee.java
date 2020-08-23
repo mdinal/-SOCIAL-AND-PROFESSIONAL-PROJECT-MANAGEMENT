@@ -28,6 +28,8 @@ import java.rmi.Naming;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class EditEmployee extends JFrame {
 
@@ -40,6 +42,7 @@ public class EditEmployee extends JFrame {
 	private JButton btnDelete;
 	private JButton btnCancle;
 	int ID=-1;
+	private JTextField Email;
 
 	/**
 	 * Launch the application.
@@ -103,6 +106,15 @@ public class EditEmployee extends JFrame {
 		contentPane.add(Address);
 		
 		Phone = new JTextField();
+		Phone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if(!(Character.isDigit(c) ||(c==KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_DELETE))) {
+					e.consume();
+				}
+			}
+		});
 		Phone.setColumns(10);
 		Phone.setBounds(276, 255, 191, 20);
 		contentPane.add(Phone);
@@ -116,9 +128,18 @@ public class EditEmployee extends JFrame {
 		Date.setBounds(276, 125, 191, 20);
 		contentPane.add(Date);
 		
+		JLabel lblNewLabel_7 = new JLabel("Email");
+		lblNewLabel_7.setBounds(173, 440, 46, 14);
+		contentPane.add(lblNewLabel_7);
+		
+		Email = new JTextField();
+		Email.setColumns(10);
+		Email.setBounds(276, 437, 191, 20);
+		contentPane.add(Email);
+		
 		JLabel Error = new JLabel("");
 		Error.setForeground(Color.RED);
-		Error.setBounds(276, 261, 191, 14);
+		Error.setBounds(194, 482, 191, 14);
 		contentPane.add(Error);
 		
 		JSpinner Position = new JSpinner();
@@ -141,12 +162,14 @@ public class EditEmployee extends JFrame {
 					Error.setText("Enter NIC number");
 				}else if(!(NIC.getText().contains("V")||NIC.getText().contains("V"))) {
 					Error.setText("Enter vaild NIC number");
+				}else if(Email.getText().isEmpty()){
+					Error.setText("Enter vaild Email");
 				}else {
 					try {
 						Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
 						DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
 						String StringDate=dateFormat.format(Date.getDate());  
-						Empolyee E=new Empolyee(Name.getText(),StringDate,Address.getText(),Integer.parseInt(Phone.getText()),NIC.getText(),Position.getValue().toString());
+						Empolyee E=new Empolyee(Name.getText(),StringDate,Address.getText(),Integer.parseInt(Phone.getText()),NIC.getText(),Position.getValue().toString(),Email.getText());
 						E.setID(ID);
 						boolean re=lg.editEMP(E);
 						if(re) {
@@ -160,7 +183,7 @@ public class EditEmployee extends JFrame {
 				}
 			}
 		});
-		btnNewButton.setBounds(234, 492, 89, 23);
+		btnNewButton.setBounds(234, 512, 89, 23);
 		contentPane.add(btnNewButton);
 		
 		btnDelete = new JButton("Delete");
@@ -189,7 +212,7 @@ public class EditEmployee extends JFrame {
 				}
 			}
 		});
-		btnDelete.setBounds(374, 492, 89, 23);
+		btnDelete.setBounds(374, 512, 89, 23);
 		contentPane.add(btnDelete);
 		
 		btnCancle = new JButton("Back");
@@ -201,7 +224,7 @@ public class EditEmployee extends JFrame {
 				dispose(); 
 			}
 		});
-		btnCancle.setBounds(522, 492, 89, 23);
+		btnCancle.setBounds(522, 512, 89, 23);
 		contentPane.add(btnCancle);
 	
 		
@@ -222,6 +245,7 @@ public class EditEmployee extends JFrame {
 						Position.setValue(E.getPosition());
 						Address.setText(E.getAddress());
 						NIC.setText(E.getNIC());
+						Email.setText(E.getEmail());
 						java.util.Date dateset = new SimpleDateFormat("yyyy-MM-dd").parse(E.getDateofbirth());
 						Date.setDate(dateset);
 						
@@ -238,6 +262,8 @@ public class EditEmployee extends JFrame {
 		lblNewLabel_6.setIcon(new ImageIcon(AddEmployee.class.getResource("/images/dribble.gif")));
 		lblNewLabel_6.setBounds(0, 0, 800, 600);
 		contentPane.add(lblNewLabel_6);
+		
+	
 		setUndecorated(true);
 		setLocationRelativeTo(null);
 	}

@@ -20,6 +20,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JFormattedTextField;
 import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class DoctorAdd extends JFrame {
 
@@ -88,6 +90,15 @@ public class DoctorAdd extends JFrame {
 		contentPane.add(Email);
 		
 		Phone = new JTextField();
+		Phone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if(!(Character.isDigit(c) ||(c==KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_DELETE))) {
+					e.consume();
+				}
+			}
+		});
 		Phone.setColumns(10);
 		Phone.setBounds(356, 255, 302, 20);
 		contentPane.add(Phone);

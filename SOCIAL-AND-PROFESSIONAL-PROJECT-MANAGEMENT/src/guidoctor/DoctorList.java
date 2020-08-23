@@ -13,6 +13,7 @@ import frontend.Login;
 import interfacePackage.Interface;
 import objects.Log;
 import objects.Patient;
+import shared.passwordD;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -63,7 +64,7 @@ public class DoctorList extends JFrame {
 		contentPane.setLayout(null);
 		
 		RoomID = new JLabel("");
-		RoomID.setBounds(50, 29, 46, 14);
+		RoomID.setBounds(221, 29, 46, 14);
 		contentPane.add(RoomID);
 		
 		JButton btnNewButton = new JButton("Log Out");
@@ -207,6 +208,25 @@ public class DoctorList extends JFrame {
 		try {
 			Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
 			Log D=lg.logeduser();
+		}catch(Exception ed){
+			System.out.print(ed);
+		}
+		
+		JButton btnProfile = new JButton("Profile");
+		btnProfile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				passwordD p=new passwordD();
+				p.setVisible(true);
+				setVisible(false);
+				dispose();
+			}
+		});
+		btnProfile.setBounds(38, 20, 89, 23);
+		contentPane.add(btnProfile);
+		
+		try {
+			Interface lg=(Interface)Naming.lookup("rmi://localhost:6080//");  
+			RoomID.setText(lg.getroomID());
 		}catch(Exception ed){
 			System.out.print(ed);
 		}

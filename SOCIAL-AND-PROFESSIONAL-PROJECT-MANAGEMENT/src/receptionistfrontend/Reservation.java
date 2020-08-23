@@ -28,6 +28,8 @@ import objects.Patient;
 
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Reservation extends JFrame {
 
@@ -98,6 +100,15 @@ public class Reservation extends JFrame {
 		scrollPane.getViewport().setOpaque(false);
 		
 		DOD = new JTextField();
+		DOD.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if(!(Character.isDigit(c) ||(c==KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_DELETE))) {
+					e.consume();
+				}
+			}
+		});
 		DOD.setBounds(219, 266, 250, 20);
 		contentPane.add(DOD);
 		DOD.setColumns(10);
@@ -116,6 +127,15 @@ public class Reservation extends JFrame {
 		contentPane.add(lblNewLabel_1_1);
 		
 		Age = new JTextField();
+		Age.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if(!(Character.isDigit(c) ||(c==KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_DELETE))) {
+					e.consume();
+				}
+			}
+		});
 		Age.setColumns(10);
 		Age.setBounds(219, 353, 250, 20);
 		contentPane.add(Age);
@@ -125,6 +145,15 @@ public class Reservation extends JFrame {
 		contentPane.add(lblNewLabel_1_1_1);
 		
 		Phone = new JTextField();
+		Phone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char c=e.getKeyChar();
+				if(!(Character.isDigit(c) ||(c==KeyEvent.VK_BACK_SPACE) || (c==KeyEvent.VK_DELETE))) {
+					e.consume();
+				}
+			}
+		});
 		Phone.setColumns(10);
 		Phone.setBounds(219, 402, 250, 20);
 		contentPane.add(Phone);

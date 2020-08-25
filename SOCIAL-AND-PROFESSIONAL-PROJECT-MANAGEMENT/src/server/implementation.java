@@ -22,12 +22,17 @@ import objects.Reservation;
 import objects.Room;
 import objects.Vehicle;
 import security.encryptionClass;
+import security.mailexample;
 
 
 public class implementation extends UnicastRemoteObject implements Interface{
 
 	Log userCurrent=new Log();
 	String RoomID;
+	int resetcode;
+	String type;
+	String UserID;
+
 	protected implementation() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
@@ -892,7 +897,8 @@ public class implementation extends UnicastRemoteObject implements Interface{
 			ResultSet rs=st.executeQuery(SQL);
 			if(rs.next()) {
 				ID=rs.getString("ID");
-				System.out.print(ID);
+				type="doctor";
+				UserID=ID;
 				re=1;
 			}else {
 				try {
@@ -903,7 +909,8 @@ public class implementation extends UnicastRemoteObject implements Interface{
 					ResultSet rs1=st1.executeQuery(SQL1);
 					if(rs1.next()) {
 						ID=rs1.getString("ID");
-						System.out.print(ID);
+						type="employee";
+						UserID=ID;
 						re=2;
 					}
 				}catch (Exception se){
@@ -913,25 +920,19 @@ public class implementation extends UnicastRemoteObject implements Interface{
 		
 		}catch (Exception se){
 			  System.out.print(se);
-		  }
-		try {
-			Random rand=new Random();
-			code=rand.nextInt(999999);
-			String host="smtp.mail.yahoo.com";
-			String user="infohospitalrecovery@yahoo.com";
-			String pass="#batman1234";
-			String subject="Reseting Code";
-			String message="Your reset Code is :"+code;
-			boolean sessuinDebug=false;
-			Properties pros=System.getProperties();
-			pros.put("mail.smtp.starttls.enable", "true");
-			pros.put("mail.smtp.host", "465");
-			pros.put("mail.smtp.auth","true");
-			pros.put("mail.smtp.starttls.required","true");
-			
-		}catch (Exception se){
-			  System.out.print(se);
-		  }
+		}
+		if(!(re==-1)) {
+			mailexample mail=new mailexample();
+			try {
+				Random rand=new Random();
+				int code1=rand.nextInt(999999);
+				resetcode=code1;
+				mail.set(Email,resetcode);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return re;
 		
 	}
@@ -1029,5 +1030,122 @@ public class implementation extends UnicastRemoteObject implements Interface{
 		return list;
 		
 	}
+	public List doctorlist()throws RemoteException {
 
+		List<Doctor> list= new ArrayList<Doctor>();
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+			Statement st=con.createStatement();
+			String SQL="SELECT * FROM `doctor`";
+			ResultSet rs=st.executeQuery(SQL);
+			
+			while(rs.next()) {
+				Doctor V=new Doctor();
+				V.setID(rs.getInt("ID"));
+				V.setName(rs.getString("Name"));
+				V.setAddress(rs.getString("Address"));
+				V.setEmail(rs.getString("Email"));
+				V.setPhone(rs.getInt("Phone"));
+				V.setSpecialist(rs.getString("Specialist"));
+				list.add(V);
+			}
+		
+		}catch (Exception e){
+		      System.err.println(e.getMessage());
+		    }
+		return list;
+		
+	}
+	public List Emplist()throws RemoteException {
+
+		List<Empolyee> list= new ArrayList<Empolyee>();
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+			Statement st=con.createStatement();
+			String SQL="SELECT * FROM `employee`";
+			ResultSet rs=st.executeQuery(SQL);
+			
+			while(rs.next()) {
+				Empolyee V=new Empolyee();
+				V.setID(rs.getInt("ID"));
+				V.setName(rs.getString("Name"));
+				V.setAddress(rs.getString("Address"));
+				V.setEmail(rs.getString("Email"));
+				V.setPhone(rs.getInt("Phone"));
+				V.setPosition(rs.getString("Position"));
+				V.setNIC(rs.getString("NIC"));
+				V.setDateofbirth(rs.getString("Date of Birth"));
+				list.add(V);
+			}
+		
+		}catch (Exception e){
+		      System.err.println(e.getMessage());
+		    }
+		return list;
+		
+	}
+	public boolean checkcode(int x)throws RemoteException {
+		if(resetcode==x) {
+			return true;
+		}
+		return false;
+		
+	}
+	public boolean chagepassowrd(String d)throws RemoteException{
+		  encryptionClass encryption = null;
+			try {
+				encryption = new encryptionClass();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    String encryptionpassword=encryption.encrypt(d);
+		if(type.equals("employee")) {
+			try
+			  {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+			    PreparedStatement ps = con.prepareStatement(
+			      "UPDATE `employee` SET `Password`=? WHERE ID=?");
+
+			    ps.setString(1,encryptionpassword);
+			    ps.setString(2,UserID);
+
+			    ps.executeUpdate();
+			    ps.close();
+			  }
+			  catch (Exception se)
+			  {
+				  System.out.print(se);
+				  return false;
+			  }
+		}else if(type.equals("doctor")) {
+			try
+			  {
+				Class.forName("com.mysql.jdbc.Driver");
+				Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/hospital","root","");
+
+			    PreparedStatement ps = con.prepareStatement(
+			      "UPDATE `doctor` SET `Password`=? WHERE ID=?");
+
+			    ps.setString(1,encryptionpassword);
+			    ps.setString(2,UserID);
+
+			    ps.executeUpdate();
+			    ps.close();
+			  }
+			  catch (Exception se)
+			  {
+				  System.out.print(se);
+				  return false;
+			  }
+		
+	}
+		return true;
+}
 }

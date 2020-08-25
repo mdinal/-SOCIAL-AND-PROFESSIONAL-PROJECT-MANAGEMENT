@@ -54,5 +54,8 @@ public interface Interface extends Remote {
 	public boolean EditItem(Item V) throws RemoteException;
 	public boolean DeleteItem(String V) throws RemoteException;
 	public List Itemlist()throws RemoteException;
-	
+	public List doctorlist()throws RemoteException;
+	public List Emplist()throws RemoteException;
+	public boolean checkcode(int x)throws RemoteException ;
+	public boolean chagepassowrd(String d)throws RemoteException;
 }

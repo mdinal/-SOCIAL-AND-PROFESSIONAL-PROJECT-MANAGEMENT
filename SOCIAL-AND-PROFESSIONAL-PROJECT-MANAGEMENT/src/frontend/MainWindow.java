@@ -132,6 +132,18 @@ public class MainWindow extends JFrame {
 		btnNewButton_2.setBounds(294, 438, 246, 23);
 		contentPane.add(btnNewButton_2);
 		
+		JButton btnDatabase = new JButton("Database");
+		btnDatabase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DB db=new DB();
+				db.setVisible(true);
+				setVisible(false);
+				dispose();
+			}
+		});
+		btnDatabase.setBounds(294, 496, 246, 23);
+		contentPane.add(btnDatabase);
+		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon(MainWindow.class.getResource("/images/medical_building_800x600.gif")));
 		lblNewLabel.setBounds(0, 0, 800, 600);

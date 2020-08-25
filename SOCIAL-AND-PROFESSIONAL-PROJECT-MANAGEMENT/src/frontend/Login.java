@@ -12,6 +12,7 @@ import interfacePackage.Interface;
 import nurse.Nurse;
 import objects.Log;
 import receptionistfrontend.Receptionistmain;
+import shared.ResetPassword;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -138,6 +139,13 @@ public class Login extends JFrame {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				lblNewLabel_3.setForeground(Color.black);
+			}
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				ResetPassword rp=new ResetPassword();
+				rp.setVisible(true);
+				setVisible(false);
+				dispose();
 			}
 		});
 		lblNewLabel_3.setBounds(248, 402, 121, 14);
